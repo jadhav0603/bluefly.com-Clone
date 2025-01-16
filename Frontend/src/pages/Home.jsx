@@ -1,13 +1,13 @@
 import Slider from "../components/Slider"
 import HomePageCard from "../components/HomePageCard"
-
+import Footer from "../components/Footer"
 
 export default function Home(){
     return(
         <div className="">
             <Slider />
             <div className="border w-[93vw] m-[3vw] ">
-                <h1 className="text-4xl py-[3vw]  flex justify-center">SHOP BY</h1>
+                <h1 className="text-[3vw] py-[3.5vw]  flex justify-center">SHOP BY</h1>
                 <div className="grid grid-cols-4 justify-center gap-y-20 px-[3vw] ">
                     <HomePageCard url={"./image/Home/img117.webp"} heading={"LUXE HANDBAGS"}/>
                     <HomePageCard url={"./image/Home/img118.webp"} heading={"DESIGNER SHOES"}/>
@@ -25,14 +25,16 @@ export default function Home(){
 
 
             <div>
-                <h1 className="text-4xl py-[3vw]  flex justify-center">NEW ARRIVALS</h1>
+                <h1 className="text-[3vw] py-[3vw]  flex justify-center">NEW ARRIVALS</h1>
 
             </div>
 
             <div>
-                <h1 className="text-4xl py-[3vw]  flex justify-center">RECOMMENDED PRODUCTS</h1>
+                <h1 className="text-[3vw] py-[3vw]  flex justify-center">RECOMMENDED PRODUCTS</h1>
 
             </div>
+
+            <Footer />
 
         </div>
     )

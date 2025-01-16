@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faUser,faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import Routes from '../components/Routes'
+import NavbarRoutes from '../components/NavbarRoutes'
 
 
 
@@ -15,7 +15,7 @@ function Navbar() {
 
   return (
     <div>
-      <div className="bg-black w-[98.5vw] text-[1.1vw] text-white py-3.5 flex justify-center">
+      <div className="bg-black w-[98.7vw] text-[1.1vw] text-white py-3.5 flex justify-center">
         <p>FREE STANDARD SHIPPING - ANY ORDER OVER $99. SHOP NOW</p>
       </div>
 
@@ -27,7 +27,7 @@ function Navbar() {
 
         <div className="flex">
           <img className="w-[22vw] h-fit" src="./image/Home/img103.webp" onClick={()=>handleHome()} />
-          <input className="w-[23vw] h-fit mx-[20px] mt-[35px] border-b border-black" type="text" />
+          <input className="w-[23vw] h-fit mx-[20px] mt-[35px] border-b border-black focus:outline-none" type="text" />
           <FontAwesomeIcon className="relative right-12 top-6 text-[1.7vw]" icon={faMagnifyingGlass} />
         </div>
 
@@ -37,7 +37,7 @@ function Navbar() {
         </div>
       </div> 
       
-      <Routes />
+      <NavbarRoutes />
       
       <div className="flex justify-center w-100vw">
         <img className="w-[94.5vw] p-[10px]" src="./image/Home/img105.webp" />
