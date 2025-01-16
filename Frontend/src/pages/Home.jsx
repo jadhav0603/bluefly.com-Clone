@@ -1,8 +1,22 @@
 import Slider from "../components/Slider"
 import HomePageCard from "../components/HomePageCard"
 import Footer from "../components/Footer"
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Home(){
+
+    useEffect(()=>{
+        handleNavSearchData('rating','4');
+    },[])
+
+    const handleNavSearchData = async (key, value) => {
+        const response = await axios.get(`http://localhost:3000/searchData/${key}/${value}`);
+        const data = response.data
+        console.log("DATA = ",data);
+        
+      };
+
     return(
         <div className="">
             <Slider />
