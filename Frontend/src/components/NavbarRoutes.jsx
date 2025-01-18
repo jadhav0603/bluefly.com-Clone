@@ -100,7 +100,7 @@ function Routes() {
   const Navigate = useNavigate();
 
   const handleNavSearchData = async (key, value, productCategory) => {
-    const response = await axios.get(`http://localhost:3000/searchData/${key}/${value}`);
+    const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`);
     console.log(response.data);
     const data = []
 

@@ -160,7 +160,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       {/* Option 5: Price */}
       <div>
         <button
-          onClick={() => toggleDropdown("price")}
+          // onClick={() => toggleDropdown("price")}
           className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
         >
           PRICE
@@ -174,7 +174,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
                 type="number"
                 name="priceFrom"
                 className="block w-full mt-1 border border-gray-300 rounded"
-                onChange={(e)=> handleFilterChange("price",e.target.value)} 
+                // onChange={(e)=> handleFilterChange("price",e.target.value)} 
               />
             </label>
             <label className="block text-sm text-gray-600">
@@ -183,7 +183,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
                 type="number"
                 name="priceTo"
                 className="block w-full mt-1 border border-gray-300 rounded"
-                onChange={(e)=> handleFilterChange("price",e.target.value)} 
+                // onChange={(e)=> handleFilterChange("price",e.target.value)} 
               />
             </label>
           </div>

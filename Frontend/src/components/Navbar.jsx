@@ -13,7 +13,7 @@ function Navbar() {
  const Navigate = useNavigate()
 
  const handleNavSearchData = async () => {
-  const response = await axios.get(`http://localhost:3000/${inputVal}`);
+  const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/${inputVal}`);
   console.log(response.data);
   const data = []
 
@@ -24,6 +24,22 @@ function Navbar() {
   }
 
   // console.log("data array = ",data)
+
+  Navigate('/SearchedDataPage', { state: { data } })
+
+};
+
+
+const filterNavSearchData = async (key, value, productCategory) => {
+  const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`);
+  console.log(response.data);
+  const data = []
+
+  response.data.map((ele)=>{
+    if(ele.category === productCategory || productCategory === "allData"){
+      data.push(ele)
+    }
+  })
 
   Navigate('/SearchedDataPage', { state: { data } })
 
@@ -45,8 +61,8 @@ function Navbar() {
 
       <div className="flex pt-[30px] px-[3vw]  border justify-between">
         <div className="w-[32vw] h-[100px] text-[1.6vw] text-gray-800 font-semibold pt-[68px] flex gap-[1vw]">
-          <span className="hover:border-b border-black" onClick={() => handleNavSearchData("gender","Female","allData")}> WOMEN </span>
-          <span className="hover:border-b border-black" onClick={() => handleNavSearchData("gender","Male","allData")} > MEN </span>
+          <span className="hover:border-b border-black" onClick={() => filterNavSearchData("gender","Female","allData")}> WOMEN </span>
+          <span className="hover:border-b border-black" onClick={() => filterNavSearchData("gender","Male","allData")} > MEN </span>
         </div>
 
         <div className="flex">
