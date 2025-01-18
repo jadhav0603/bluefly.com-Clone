@@ -4,6 +4,7 @@ require ('dotenv').config()
 const cors = require('cors')
 
 const searchData = require('./Routes/NavbarSearch.Route')
+const searchBarData = require('./Routes/searchBarData.Route')
 
 const app = express()
 
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 3005
 app.use(express.json())
 app.use(cors())
 
+app.use('/', searchBarData)
 app.use('/searchData', searchData)
 
 

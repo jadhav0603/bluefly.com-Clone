@@ -99,10 +99,16 @@ const allBrands = [
 function Routes() {
   const Navigate = useNavigate();
 
-  const handleNavSearchData = async (key, value) => {
+  const handleNavSearchData = async (key, value, productCategory) => {
     const response = await axios.get(`http://localhost:3000/searchData/${key}/${value}`);
     console.log(response.data);
-    const data = response.data
+    const data = []
+
+    response.data.map((ele)=>{
+      if(ele.category === productCategory || productCategory === "allData"){
+        data.push(ele)
+      }
+    })
 
     Navigate('/SearchedDataPage', { state: { data } })
 
@@ -125,7 +131,7 @@ function Routes() {
                 <li
                   key={index}
                   className="hover:text-green-500 cursor-pointer w-[20vw]"
-                  onClick={() => handleNavSearchData("designer", brand)}
+                  onClick={() => handleNavSearchData("designer", brand, "allData")}
                 >
                   {brand}
                 </li>
@@ -145,13 +151,15 @@ function Routes() {
             <div className="flex">
               <ul className="">
                 {clothingBrands.map((brand, index) => (
-                  <li
+                  
+                    <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("designer", brand)}
+                    onClick={() => handleNavSearchData("designer", brand, "Clothing")}
                   >
                     {brand}
-                  </li>
+                  </li> 
+                
                 ))}
               </ul>
 
@@ -160,7 +168,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("adjective", brand)}
+                    onClick={() => handleNavSearchData("adjective", brand, "Clothing")}
                   >
                     {brand}
                   </li>
@@ -173,7 +181,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("productType", brand)}
+                    onClick={() => handleNavSearchData("productType", brand, "Clothing")}
                   >
                     {brand}
                   </li>
@@ -197,7 +205,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("designer", brand)}
+                    onClick={() => handleNavSearchData("designer", brand, "Shoes")}
                   >
                     {brand}
                   </li>
@@ -209,7 +217,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("adjective", brand)}
+                    onClick={() => handleNavSearchData("adjective", brand, "Shoes")}
                   >
                     {brand}
                   </li>
@@ -222,7 +230,56 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("productType", brand)}
+                    onClick={() => handleNavSearchData("productType", brand, "Shoes")}
+                  >
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+          </div>
+        </li>
+
+
+
+        <li className="relative group">
+          <div className="">SUNGLASSES</div>
+
+          <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-35.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
+            <h1 className="py-[10px]">Featured Designers</h1>
+            <div className="flex">
+              <ul className="">
+                {sunglassesBrands.map((brand, index) => (
+                  <li
+                    key={index}
+                    className="hover:text-green-500 cursor-pointer w-[20vw]"
+                    onClick={() => handleNavSearchData("designer", brand, "Sunglasses")}
+                  >
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+
+              <ul>
+                {sunglassesAdjectives.map((brand, index) => (
+                  <li
+                    key={index}
+                    className="hover:text-green-500 cursor-pointer w-[20vw]"
+                    onClick={() => handleNavSearchData("adjective", brand, "Sunglasses")}
+                  >
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+
+
+              <ul>
+                {sunglassesProductTypes.map((brand, index) => (
+                  <li
+                    key={index}
+                    className="hover:text-green-500 cursor-pointer w-[20vw]"
+                    onClick={() => handleNavSearchData("productType", brand, "Sunglasses")}
                   >
                     {brand}
                   </li>
@@ -238,7 +295,7 @@ function Routes() {
         <li className="relative group">
           <div className="">HANDBAGS</div>
 
-          <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-35.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
+          <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-47.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
             <div className="flex">
               <ul className="">
@@ -246,7 +303,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("designer", brand)}
+                    onClick={() => handleNavSearchData("designer", brand, "Handbags")}
                   >
                     {brand}
                   </li>
@@ -258,7 +315,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("adjective", brand)}
+                    onClick={() => handleNavSearchData("adjective", brand,"Handbags")}
                   >
                     {brand}
                   </li>
@@ -271,7 +328,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("productType", brand)}
+                    onClick={() => handleNavSearchData("productType", brand,"Handbags")}
                   >
                     {brand}
                   </li>
@@ -286,7 +343,7 @@ function Routes() {
         <li className="relative group">
           <div className="">JEWELRY</div>
 
-          <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-47.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
+          <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-60.7vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
             <div className="flex">
               <ul className="">
@@ -294,7 +351,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("designer", brand)}
+                    onClick={() => handleNavSearchData("designer", brand,"Jewelry")}
                   >
                     {brand}
                   </li>
@@ -306,7 +363,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("adjective", brand)}
+                    onClick={() => handleNavSearchData("adjective", brand, "Jewelry")}
                   >
                     {brand}
                   </li>
@@ -319,7 +376,7 @@ function Routes() {
                   <li
                     key={index}
                     className="hover:text-green-500 cursor-pointer w-[20vw]"
-                    onClick={() => handleNavSearchData("productType", brand)}
+                    onClick={() => handleNavSearchData("productType", brand, "Jewelry")}
                   >
                     {brand}
                   </li>
@@ -331,7 +388,7 @@ function Routes() {
         </li>
 
 
-        <li>ACCESSORIES</li>
+        {/* <li>ACCESSORIES</li> */}
 
 
         <li className="relative group">
@@ -341,7 +398,7 @@ function Routes() {
             <ul className="">
               <li
                 className="hover:text-green-500 cursor-pointer"
-                onClick={() => handleNavSearchData(" ", )}
+                onClick={() => handleNavSearchData("sellingPrice",50, "allData" )}
               >
                 <div className="flex justify-center item-center w-[7vw]">
                   <FontAwesomeIcon className="flex justify-center mt-[15px] m-[10px]" icon={faLessThan} /> 
@@ -372,14 +429,14 @@ function Routes() {
             <ul className="">
               <li
                 className="hover:text-green-500 cursor-pointer flex justify-center"
-                onClick={() => handleNavSearchData("gender","Female")}
+                onClick={() => handleNavSearchData("gender","Female","allData")}
               >
                 WOMEN'S 
               </li>
 
               <li
                 className="hover:text-green-500 cursor-pointer flex justify-center"
-                onClick={() => handleNavSearchData("gender", "Male")}
+                onClick={() => handleNavSearchData("gender", "Male", "allData")}
               >
               MEN'S
               </li>
