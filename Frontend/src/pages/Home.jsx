@@ -1,6 +1,6 @@
 import Slider from "../components/Slider"
 import HomePageCard from "../components/HomePageCard"
-import Footer from "../components/Footer"
+
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -47,8 +47,6 @@ export default function Home(){
                 <h1 className="text-[3vw] py-[3vw]  flex justify-center">RECOMMENDED PRODUCTS</h1>
 
             </div>
-
-            <Footer />
 
         </div>
     )

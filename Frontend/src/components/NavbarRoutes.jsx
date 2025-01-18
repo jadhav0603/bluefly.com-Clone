@@ -148,6 +148,10 @@ function Routes() {
 
           <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-15.7vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
+            <h1 
+              className="hover:text-green-500 cursor-pointer w-[20vw]"
+              onClick={() => handleNavSearchData("category", "Clothing", "allData")}
+            >See ALL</h1>
             <div className="flex">
               <ul className="">
                 {clothingBrands.map((brand, index) => (
@@ -199,6 +203,10 @@ function Routes() {
 
           <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-26.8vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
+            <h1 
+              className="hover:text-green-500 cursor-pointer w-[20vw]"
+              onClick={() => handleNavSearchData("category", "Shoes", "allData")}
+            >See ALL</h1>
             <div className="flex">
               <ul className="">
                 {shoesBrands.map((brand, index) => (
@@ -248,6 +256,10 @@ function Routes() {
 
           <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-35.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
+            <h1 
+              className="hover:text-green-500 cursor-pointer w-[20vw]"
+              onClick={() => handleNavSearchData("category", "Sunglasses", "allData")}
+            >See ALL</h1>
             <div className="flex">
               <ul className="">
                 {sunglassesBrands.map((brand, index) => (
@@ -297,6 +309,10 @@ function Routes() {
 
           <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-47.6vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
+            <h1 
+              className="hover:text-green-500 cursor-pointer w-[20vw]"
+              onClick={() => handleNavSearchData("category", "Handbags", "allData")}
+            >See ALL</h1>
             <div className="flex">
               <ul className="">
                 {handbagBrands.map((brand, index) => (
@@ -345,6 +361,10 @@ function Routes() {
 
           <div className="z-10 bg-white w-[96vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-60.7vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <h1 className="py-[10px]">Featured Designers</h1>
+            <h1 
+              className="hover:text-green-500 cursor-pointer w-[20vw]"
+              onClick={() => handleNavSearchData("category", "Jewelry", "allData")}
+            >See ALL</h1>
             <div className="flex">
               <ul className="">
                 {jewelryBrands.map((brand, index) => (
@@ -392,13 +412,14 @@ function Routes() {
 
 
         <li className="relative group">
-          <div className="">UNDER $50</div>
+          <div className="">UNDER $500</div>
 
           <div className="z-10 bg-white w-[12vw] flex flex-col p-[2vw] text-[1vw] shadow-xl absolute top-6 left-[-2vw] m-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 ">
             <ul className="">
               <li
                 className="hover:text-green-500 cursor-pointer"
-                onClick={() => handleNavSearchData("sellingPrice",50, "allData" )}
+                // onClick={() => handleNavSearchData("sellingPrice", "500", "allData")}
+                // onClick={() => handleNavSearchData("sellingPrice","500", "allData" )}
               >
                 <div className="flex justify-center item-center w-[7vw]">
                   <FontAwesomeIcon className="flex justify-center mt-[15px] m-[10px]" icon={faLessThan} /> 
@@ -408,7 +429,7 @@ function Routes() {
 
               <li
                 className="hover:text-green-500 cursor-pointer"
-                onClick={() => handleNavSearchData(" ", )}
+                // onClick={() => handleNavSearchData(" ", )}
               >
                 <div className="flex justify-center item-center w-[7vw]">
                   <FontAwesomeIcon className="flex justify-center mt-[15px] m-[10px]" icon={faLessThan} /> 

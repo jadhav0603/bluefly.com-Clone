@@ -1,29 +1,48 @@
-
-
-
 import React, { useState, useEffect } from "react";
 
-const FilterPanel = (response) => {
+
+const FilterPanel = ({filters,setFilters,response}) => {
   const [brands, setBrands] = useState([]);
   const [isOpen, setIsOpen] = useState({});
 
-  // Fetch API Data for brands
+  const brandsArray = []
   useEffect(() => {
-    const fetchBrands = async () => {
-      // const response = await fetch("YOUR_API_ENDPOINT");
-      // const data = await response.json();
-      setBrands(response.designer || []);
+    
+    const fetchBrands = () => {
+      response.map((ele)=>{
+        if(!brandsArray.includes(ele.designer)){
+          brandsArray.push(ele.designer)
+        }
+      });
+      setBrands(brandsArray)
     };
     fetchBrands();
-  }, []);
+  }, [response]);
 
   const toggleDropdown = (key) => {
-    setIsOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+    setIsOpen((prev) => {
+      const newOpenState = { ...prev, [key]: !prev[key]}
+      
+      if (!newOpenState[key]) {
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          [key === "brand" ? "brand" : key]: null, // Reset corresponding filter
+        }));
+      }
+      return newOpenState;
+    })
+  };
+
+  const handleFilterChange = (filterKey, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [filterKey]: value,
+    }));
   };
 
   return (
     <div className="w-72 bg-gray-100 p-4 rounded-lg shadow-lg">
-      <h2 className="text-lg font-semibold mb-4">Filter By</h2>
+      <h2 className="text-xl font-semibold mb-4">Filter By</h2>
 
       {/* Option 1: Brand */}
       <div>
@@ -41,7 +60,13 @@ const FilterPanel = (response) => {
                 key={brand}
                 className="flex items-center space-x-2 text-sm text-gray-600"
               >
-                <input type="radio" name="brand" value={brand} />
+                <input 
+                  type="radio" 
+                  name="brand" 
+                  value={brand} 
+                  // onChange={() => setFilters((prev) => ({ ...prev, brand }))}
+                  onChange={(e)=> handleFilterChange("brand",e.target.value)} 
+                />
                 <span>{brand}</span>
               </label>
             ))}
@@ -65,7 +90,7 @@ const FilterPanel = (response) => {
                 key={gender}
                 className="flex items-center space-x-2 text-sm text-gray-600"
               >
-                <input type="radio" name="gender" value={gender} />
+                <input type="radio" name="gender" value={gender} onChange={(e)=> handleFilterChange("gender",e.target.value)} />
                 <span>{gender}</span>
               </label>
             ))}
@@ -89,7 +114,7 @@ const FilterPanel = (response) => {
                 key={range}
                 className="flex items-center space-x-2 text-sm text-gray-600"
               >
-                <input type="radio" name="percentOff" value={range} />
+                <input type="radio" name="percentOff" value={range} onChange={(e)=> handleFilterChange("percentOff",e.target.value)} />
                 <span>{range}</span>
               </label>
             ))}
@@ -124,7 +149,7 @@ const FilterPanel = (response) => {
                 key={color}
                 className="flex items-center space-x-2 text-sm text-gray-600"
               >
-                <input type="radio" name="color" value={color} />
+                <input type="radio" name="color" value={color} onChange={(e)=> handleFilterChange("color",e.target.value)}  />
                 <span>{color}</span>
               </label>
             ))}
@@ -149,6 +174,7 @@ const FilterPanel = (response) => {
                 type="number"
                 name="priceFrom"
                 className="block w-full mt-1 border border-gray-300 rounded"
+                onChange={(e)=> handleFilterChange("price",e.target.value)} 
               />
             </label>
             <label className="block text-sm text-gray-600">
@@ -157,6 +183,7 @@ const FilterPanel = (response) => {
                 type="number"
                 name="priceTo"
                 className="block w-full mt-1 border border-gray-300 rounded"
+                onChange={(e)=> handleFilterChange("price",e.target.value)} 
               />
             </label>
           </div>
@@ -165,27 +192,35 @@ const FilterPanel = (response) => {
 
       {/* Option 6: Size */}
       <div>
-        <button
-          onClick={() => toggleDropdown("size")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+  <button
+    onClick={() => toggleDropdown("size")}
+    className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+  >
+    SIZE
+    <span>&#9662;</span>
+  </button>
+  {isOpen.size && (
+    <div className="mt-2">
+      {Array.from({ length: 6 }, (_, i) => i + 5).map((size) => (
+        <label
+          key={size}
+          className="flex items-center space-x-2 text-sm text-gray-600"
         >
-          SIZE
-          <span>&#9662;</span>
-        </button>
-        {isOpen.size && (
-          <div className="mt-2">
-            {Array.from({ length: 10 }, (_, i) => i).map((size) => (
-              <label
-                key={size}
-                className="flex items-center space-x-2 text-sm text-gray-600"
-              >
-                <input type="radio" name="size" value={size} />
-                <span>{size}</span>
-              </label>
-            ))}
-          </div>
-        )}
-      </div>
+          <input
+            type="radio"
+            name="size"
+            value={size}
+            onChange={() => setFilters((prev) => ({ ...prev, size }))}
+          />
+          <span>{size}</span>
+        </label>
+      ))}
+    </div>
+  )}
+</div>
+
+
+
     </div>
   );
 };

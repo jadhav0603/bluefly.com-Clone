@@ -8,15 +8,16 @@ export default function SearchedDataPage(){
     
     console.log("searched Data = ",data)
     return(
+        <div>
+            <h1 className="W-[98vw] text-[3vw] uppercase flex justify-center p-[2vw]">DESIGNER {data[0].category}</h1>
         <div className="flex p-[3vw] gap-10">
-            <div>
-                <FilterPanel response={data} />
-            </div>
+            
             <div>
                 <Card response={data} />
             </div>
            
 
+        </div>
         </div>
     )
 }
