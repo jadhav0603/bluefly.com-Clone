@@ -15,6 +15,12 @@ app.use(cors())
 
 app.use('/', searchBarData)
 app.use('/searchData', searchData)
+app.use('/addProduct', addProducts)
+
+
+app.get('/warmUp', async(req,res)=>{
+    res.send('Backend warmed up!');
+})
 
 
 app.listen(PORT, async()=>{
