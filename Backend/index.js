@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const searchData = require('./Routes/NavbarSearch.Route')
 const searchBarData = require('./Routes/searchBarData.Route')
+const addProducts = require('./Routes/addProduct.Route')
 
 const app = express()
 
