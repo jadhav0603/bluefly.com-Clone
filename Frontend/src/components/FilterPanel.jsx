@@ -41,14 +41,14 @@ const FilterPanel = ({filters,setFilters,response}) => {
   };
 
   return (
-    <div className="w-72 bg-gray-100 p-4 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold mb-4">Filter By</h2>
+    <div className="w-72 p-4 ">
+      <h2 className="text-[2vw] uppercase py-4 border-b border-gray-300">Filter By</h2>
 
       {/* Option 1: Brand */}
       <div>
         <button
           onClick={() => toggleDropdown("brand")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+          className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
         >
           BRAND
           <span>&#9662;</span>
@@ -78,7 +78,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       <div>
         <button
           onClick={() => toggleDropdown("gender")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+          className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
         >
           GENDER
           <span>&#9662;</span>
@@ -102,7 +102,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       <div>
         <button
           onClick={() => toggleDropdown("percentOff")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+          className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
         >
           PERCENT OFF
           <span>&#9662;</span>
@@ -126,7 +126,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       <div>
         <button
           onClick={() => toggleDropdown("color")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+          className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
         >
           COLOR
           <span>&#9662;</span>
@@ -161,7 +161,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       <div>
         <button
           // onClick={() => toggleDropdown("price")}
-          className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+          className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
         >
           PRICE
           <span>&#9662;</span>
@@ -194,7 +194,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
       <div>
   <button
     onClick={() => toggleDropdown("size")}
-    className="flex justify-between w-full py-2 border-b border-gray-300 text-left"
+    className="flex justify-between w-full py-4 text-left"
   >
     SIZE
     <span>&#9662;</span>
