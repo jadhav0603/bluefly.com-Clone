@@ -91,8 +91,8 @@ export default function Footer() {
             </p>
             <div className="mt-[5px] relative">
               <p
-                className={`absolute left-0 transition-all duration-500 ${
-                  isFocus ? "top[-10px] text-sm " : "top-5 text-[1.5vw]"
+                className={`absolute left-0 ${
+                  isFocus ? "top[-10px] text-sm transition-all duration-500" : "top-5 text-[1.5vw] transition-all duration-500"
                 }`}
               >
                 EMAIL

@@ -48,7 +48,12 @@ const filterNavSearchData = async (key, value, productCategory) => {
  
  const handleHome = ()=>{
   Navigate('/')
-  console.log("run home")
+  // console.log("run home")
+ }
+
+ const handleLogin = ()=>{
+  //  console.log("run login")
+  Navigate('/Login')
  }
 
 
@@ -79,7 +84,7 @@ const filterNavSearchData = async (key, value, productCategory) => {
         </div>
 
         <div className="flex gap-10 pt-[20px] text-[1.5vw]">
-            <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon icon={faUser} onClick={()=>handleLogin()} />
             <FontAwesomeIcon icon={faBagShopping} />
         </div>
       </div> 

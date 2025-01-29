@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import AllRoutes from './components/AllRoutes'
 import Navbar from "./components/Navbar"
 import Footer from './components/Footer'
+import FavouriteButton from './components/FavouriteButton';
+import { CountContextProvider } from './components/UseContextHook';
+
 
 function App() {
   useEffect(()=>{
@@ -11,11 +14,12 @@ function App() {
   },[])
 
   return (
-    <div>
+    <CountContextProvider>
       <Navbar />
+      <FavouriteButton />
       <AllRoutes />
       <Footer />      
-    </div>
+    </CountContextProvider>
   )
 }
 

@@ -1,14 +1,43 @@
+import { useContext, useEffect, useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { CountContext } from "./UseContextHook";
+
 
 export default function Card({ response }) {
+  const {count, setCount} = useContext(CountContext)
+  const [favorites, setFavorites] = useState([]);
+  
   const navigate = useNavigate();
 
   function handleCard(ele) {
     navigate("/SelectedProduct", { state: ele });
   }
+
+
+  const isFavorite = (product) => {
+    return favorites.some((fav) => fav.id === product.id);
+  };
+
+
+  useEffect(() => {
+    async function fetchFavorites() {
+      try {
+        const res = await axios.get(
+          "https://bluefly-com-clone-6ri4.onrender.com/addProduct/getFavouriteData"
+        );
+        setFavorites(res.data.data);
+        setCount(res.data.data.length)
+      } 
+      catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    }
+    fetchFavorites();
+  }, [setCount]);
 
   async function handleFav(ele) {
     try {
@@ -17,6 +46,14 @@ export default function Card({ response }) {
         ele
       );
       console.log("Favourite Data", res.data);
+
+      if (res.data.message === "Favourite added") {
+        setFavorites((prev) => [...prev, ele]);
+        setCount((prevCount)=> prevCount + 1);
+      } else if (res.data.message === "Favourite removed") {
+        setFavorites((prev) => prev.filter((fav) => fav.id !== ele.id));
+        setCount((prevCount) => Math.max(0, prevCount - 1));
+      }
     } catch (error) {
       console.log("Favourite error - ", error);
     }
@@ -41,7 +78,7 @@ export default function Card({ response }) {
             </div>
             <FontAwesomeIcon
               className="text-[1.5vw] relative left-[11vw] bottom-[1vw]"
-              icon={faHeart}
+              icon={isFavorite(ele) ? solidHeart : regularHeart}
               onClick={() => handleFav(ele)}
             />
             <h1 className="text-[1.5vw]" onClick={() => handleCard(ele)}>
