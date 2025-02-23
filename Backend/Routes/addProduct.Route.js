@@ -1,10 +1,9 @@
 const express = require('express')
 const mongoose = require ('mongoose')
-const verifyToken = require('../middleware/verifyToken')
 
 const router = express.Router()
 
-router.post('/favouriteData',verifyToken,async (req,res)=>{
+router.post('/favouriteData',async (req,res)=>{
     const data = req.body
     try {
         const collectionName = mongoose.connection.db.collection('favourites')
