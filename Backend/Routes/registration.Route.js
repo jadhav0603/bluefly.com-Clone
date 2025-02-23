@@ -1,5 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
+const jwt = rwquire('jsonwebtoken')
 const router = express.Router()
 
 const user = require('../models/userModel')
@@ -20,7 +21,8 @@ router.post('/', async(req, res)=>{
         const NewUser = new user({firstName,lastName,email,password:hashPass})
         await NewUser.save()
         
-        res.status(201).json({message:"User Register Successfully"})
+        const token = jwt.sign({userID:userExisted._id}, process.env.SECRET_KEY,{expiresIn:"1h"})
+        res.status(201).json({message:"User Register Successfully"}, token, userExisted)
     } catch (error) {
         res.status(500).json({RegisterError:error.message})
     }
