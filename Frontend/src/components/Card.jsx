@@ -40,33 +40,36 @@ export default function Card({ response }) {
   }, [setCount]);
 
   async function handleFav(ele) {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
 
-    if(!token){
-      navigate("/Login")
-      return
+    if (!token) {
+        navigate("/Login");
+        return;
     }
 
     try {
-      const res = await axios.post(
-        "https://bluefly-com-clone-6ri4.onrender.com/addProduct/favouriteData",
-        ele,
-        {headers:{Authorization : `Bearer ${token}`}}
-      );
-      console.log("Favourite Data", res.data);
+        const res = await axios.post(
+            "https://bluefly-com-clone-6ri4.onrender.com/addProduct/favouriteData",
+            ele,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,  // Corrected
+                }
+            }
+        );
+        console.log("Favourite Data", res.data);
 
-      if (res.data.message === "Favourite added") {
-        setFavorites((prev) => [...prev, ele]);
-        setCount((prevCount)=> prevCount + 1);
-      } else if (res.data.message === "Favourite removed") {
-        setFavorites((prev) => prev.filter((fav) => fav.id !== ele.id));
-        setCount((prevCount) => Math.max(0, prevCount - 1));
-      }
+        if (res.data.message === "Favourite added") {
+            setFavorites((prev) => [...prev, ele]);
+            setCount((prevCount) => prevCount + 1);
+        } else if (res.data.message === "Favourite removed") {
+            setFavorites((prev) => prev.filter((fav) => fav.id !== ele.id));
+            setCount((prevCount) => Math.max(0, prevCount - 1));
+        }
     } catch (error) {
-      console.log("Favourite error - ", error);
-    } 
-  }
-
+        console.log("Favourite error - ", error.response ? error.response.data : error.message);
+    }
+}
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
       {response.length > 0 ? (
