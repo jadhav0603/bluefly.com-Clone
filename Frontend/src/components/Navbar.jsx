@@ -53,7 +53,7 @@ const filterNavSearchData = async (key, value, productCategory) => {
 
  const handleLogin = ()=>{
   //  console.log("run login")
-  Navigate('/Login')
+  Navigate('/LoginModel')
  }
 
 

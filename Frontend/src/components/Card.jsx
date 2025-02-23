@@ -8,7 +8,7 @@ import { CountContext } from "./UseContextHook";
 
 
 export default function Card({ response }) {
-  const {count, setCount} = useContext(CountContext)
+  const {setCount} = useContext(CountContext)
   const [favorites, setFavorites] = useState([]);
   
   const navigate = useNavigate();
@@ -40,10 +40,18 @@ export default function Card({ response }) {
   }, [setCount]);
 
   async function handleFav(ele) {
+    const token = localStorage.getItem("token")
+
+    if(!token){
+      navigate("/Login")
+      return
+    }
+
     try {
       const res = await axios.post(
         "https://bluefly-com-clone-6ri4.onrender.com/addProduct/favouriteData",
-        ele
+        ele,
+        {headers:{Authorization : `Bearer ${token}`}}
       );
       console.log("Favourite Data", res.data);
 
@@ -56,7 +64,7 @@ export default function Card({ response }) {
       }
     } catch (error) {
       console.log("Favourite error - ", error);
-    }
+    } 
   }
 
   return (

@@ -3,7 +3,8 @@ import Home from "../pages/Home"
 import SearchedDataPage from "../pages/SearchedDataPage"
 import SelectedProduct from "../pages/SelectedProduct"
 import Payment from "../pages/payment"
-import Login from "./Login"
+import LoginModel from "./LoginModel"
+import Login from './Login'
 import Registers from "./Registers"
 
 function AllRoutes(){
@@ -13,8 +14,9 @@ function AllRoutes(){
             <Route path='/SearchedDataPage' element={<SearchedDataPage />} />
             <Route path='/SelectedProduct' element={<SelectedProduct />}  />    
             <Route path='/Payment' element={<Payment />} />
-            <Route path='/Login' element={<Login/>} />
-            <Route path="/Registers" element={<Registers/>} />
+            <Route path='/LoginModel' element={<LoginModel />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Registers" element={<Registers />} />
         </Routes>
 
 )

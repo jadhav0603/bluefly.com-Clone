@@ -9,7 +9,7 @@ import { CountContextProvider } from './components/UseContextHook';
 function App() {
   useEffect(()=>{
     fetch("https://bluefly-com-clone-6ri4.onrender.com/warm-up")
-    .then((res) => console.log(res))
+    .then((res) => console.log("warm-up : ",res))
     .catch((err) => console.error("Warm-up error:", err));
   },[])
 

@@ -1,25 +1,33 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { CountContext } from "./UseContextHook";
 
 export default function Registers() {
+    const{setIsLogin} = useContext(CountContext)
 
     const [firstName,setFirstName] = useState("");
     const [lastName,setLastName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
-
-
     const [isFirstFocus, setIsFirstFocus] = useState(false)
     const [isLastFocus, setIsLastFocus] = useState(false)
     const [isEmailFocus, setIsEmailFocus] = useState(false)
     const [isPasswordFocus, setIsPasswordFocus] = useState(false)
 
-    const handleRegister = async()=>{
+    const navigate = useNavigate()
+
+    const handleRegister = async(event)=>{
+        event.preventDefault();
         try {
-            const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/register',
+            const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/register/',
                 {firstName,lastName,email,password})
-            console.log(response)
+                console.log("Success:", response.data);
+                if(response.status == 201){
+                    localStorage.setItem('token', response.data.token)
+                    navigate('/LoginModel')
+                }
         } catch (error) {
             console.log("register error : ", error.message)
         }
@@ -29,7 +37,7 @@ export default function Registers() {
     return (
         <div className="w-[93vw] flex flex-col items-center justify-center border py-[2vw] m-[auto]">
             <h1 className="text-[2.5vw] font-semibold p-[2vw]">CREATE ACCOUNT</h1>
-            <form onSubmit={handleRegister()}>
+            <form onSubmit={handleRegister}>
                 <div className="flex flex-col">
                 <div className="flex flex-col my-[10px]">
                         <label className={`relative w-fit ${isFirstFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`}> FIRST NAME </label>
@@ -78,7 +86,7 @@ export default function Registers() {
 
                 <div className="my-[3vw] text-[0.9vw] flex justify-center">
 
-                <input className="bg-black text-white py-[6px] px-[15px] rounded-[40%]" type="submit" value="CREATE" />
+                <button className="bg-black text-white py-[6px] px-[15px] rounded-[40%]" type="submit"> CREATE </button>
                 </div>
             </form>
         </div>
