@@ -1,35 +1,31 @@
-const express = require('express')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const user = require('../models/userModel')
-require('dotenv').config()
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const router = express.Router();
+const User = require('../models/userModel');
 
-const router = express.Router()
-
-
-router.post('/', async(req,res)=>{
-    const {email,password} = req.body
+router.post('/', async (req, res) => {
+    const { email, password } = req.body;
 
     try {
-        const userExisted = await user.findOne({email})
+        const existingUser = await User.findOne({ email });
 
-        if(!userExisted){
-            return res.status(404).json("user not found")
-        }    
-
-        const passMatch = await bcrypt.compare(password, userExisted.password)
-
-        if(!passMatch){
-            return res.status(400).json("Password Incorrect")
+        if (!existingUser) {
+            return res.status(400).json({ message: "User Not Found" });
         }
-        
-        const token = jwt.sign({userID:userExisted._id}, process.env.SECRET_KEY,{expiresIn:"1h"})
-        return res.status(200).json({message:"login successful", token, userExisted})
-        
+
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Invalid Credentials" });
+        }
+
+        const token = jwt.sign({ userID: existingUser._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
+
+        res.status(200).json({ message: "Login Successful", token, user: existingUser });
+
     } catch (error) {
-        res.status(500).json({login_error:error.message})
+        res.status(500).json({ LoginError: error.message });
     }
-})
+});
 
-
-module.exports = router
+module.exports = router;
