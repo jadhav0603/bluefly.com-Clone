@@ -9,7 +9,7 @@ const favoriteSchema = new mongoose.Schema({
     adjective: { type: String },
     productType: { type: String, required: true },
     productName: { type: String, required: true },
-    originalPrice: { type: Number, required: true },
+    originalPrice: { type: Number },
     discount: { type: Number, required: true },
     sellingPrice: { type: Number, required: true },
     size: { type: Number, required: true },
