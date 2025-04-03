@@ -26,8 +26,14 @@ export default function Card({ response }) {
   useEffect(() => {
     async function fetchFavorites() {
       try {
+        const token = localStorage.getItem('token')
         const res = await axios.get(
-          "https://bluefly-com-clone-6ri4.onrender.com/addProduct/getFavouriteData"
+          "http://localhost:3000/addProduct/getFavouriteData",
+          {
+            headers:{
+            Authorization:`Bearer ${token}`
+            }
+          }
         );
         setFavorites(res.data.data);
         setCount(res.data.data.length)

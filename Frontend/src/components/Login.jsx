@@ -12,6 +12,9 @@ export default function Login() {
     const [isEmailFocus, setIsEmailFocus] = useState(false)
     const [isPasswordFocus, setIsPasswordFocus] = useState(false)
 
+    const [error, setError] = useState("")
+
+
     const handleRegister = () => {
         navigate('/Registers')
     }
@@ -20,24 +23,28 @@ export default function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/login/',
+            const response = await axios.post('http://localhost:3000/login/',
                 { email, password })
-            console.log(response.data)
+            console.log("result",response.data)
             localStorage.setItem('token', response.data.token);
             navigate('/');
         } catch (error) {
             console.error(error.response.data.message);
+            setError(error.response.data.message)
+            setEmail("")
+            setPassword("")
         }
     };
 
     return (
         <div className="w-[93vw] flex flex-col items-center justify-center border py-[2vw] m-[auto]">
             <h1 className="text-[2.5vw] font-semibold p-[2vw]">LOG IN</h1>
+            <p className="text-red-600">{error}</p>
             <form onSubmit={handleLogin}>
                 <div className="flex flex-col">
                     <div className="flex flex-col my-[10px]">
-                        <label className={`relative w-fit ${isEmailFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`}> EMAIL </label>
-                        <input className="focus:outline-none border-b border-black w-[35vw] "
+                        <label className={`relative z-0 w-fit ${isEmailFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`} > EMAIL </label>
+                        <input className="bg-transparent z-30 focus:outline-none border-b border-black w-[35vw] "
                             onFocus={() => setIsEmailFocus(true)}
                             onBlur={(e) => !e.target.value && setIsEmailFocus(false)}
                             value={email}
@@ -47,8 +54,8 @@ export default function Login() {
                         />
                     </div>
                     <div className="flex flex-col my-[10px]">
-                        <label className={`relative w-fit ${isPasswordFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`} >PASSWORD</label>
-                        <input className="focus:outline-none border-b border-black w-[35vw] "
+                        <label className={`relative z-0 w-fit ${isPasswordFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}` } >PASSWORD</label>
+                        <input className="bg-transparent focus:outline-none z-30 border-b border-black w-[35vw] "
                             onFocus={() => setIsPasswordFocus(true)}
                             onBlur={(e) => !e.target.value && setIsPasswordFocus(false)}
                             value={password}

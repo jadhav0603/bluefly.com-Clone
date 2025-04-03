@@ -6,6 +6,7 @@ import Payment from "../pages/payment"
 import LoginModel from "./LoginModel"
 import Login from './Login'
 import Registers from "./Registers"
+import FavouritePage from "../pages/favouritePage"
 
 function AllRoutes(){
     return(
@@ -17,6 +18,7 @@ function AllRoutes(){
             <Route path='/LoginModel' element={<LoginModel />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Registers" element={<Registers />} />
+            <Route path="/FavouritePage" element={<FavouritePage />} />
         </Routes>
 
 )

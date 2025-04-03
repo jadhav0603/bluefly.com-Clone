@@ -27,6 +27,8 @@ function Navbar() {
 
   Navigate('/SearchedDataPage', { state: { data } })
 
+  setInputVal("")
+
 };
 
 
@@ -56,6 +58,11 @@ const filterNavSearchData = async (key, value, productCategory) => {
   Navigate('/LoginModel')
  }
 
+ const handleKeyPress = (event) =>{
+    if(event.key === "Enter"){
+      handleNavSearchData()
+    }
+ }
 
 
   return (
@@ -73,14 +80,16 @@ const filterNavSearchData = async (key, value, productCategory) => {
         <div className="flex">
           <img className="w-[22vw] h-fit" src="./image/Home/img103.webp" onClick={()=>handleHome()} />
           <input 
+            type="text"
             className="w-[23vw] h-fit mx-[20px] mt-[35px] border-b border-black focus:outline-none" 
-            value={inputVal}
-            
+            value={inputVal} 
             onChange={(e)=>setInputVal(e.target.value)}
-            type="text" />
+            onKeyDown={handleKeyPress}
+            />
           <FontAwesomeIcon className="relative right-12 top-6 text-[1.7vw]" 
           onClick={()=>handleNavSearchData()}
-          icon={faMagnifyingGlass} />
+          icon={faMagnifyingGlass}
+          />
         </div>
 
         <div className="flex gap-10 pt-[20px] text-[1.5vw]">

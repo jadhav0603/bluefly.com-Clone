@@ -41,7 +41,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
   };
 
   return (
-    <div className="w-72 p-4 ">
+    <div className="w-[20vw] p-4 ">
       <h2 className="text-[2vw] uppercase py-4 border-b border-gray-300">Filter By</h2>
 
       {/* Option 1: Brand */}
