@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect,useContext } from "react"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { CountContext } from "../components/UseContextHook";
 
 export default function FavouritePage() {
   const [data, setData] = useState([])
+  const { count,setCount } = useContext(CountContext)
+
+
 
   useEffect(() => {
     async function fetchFavorites() {
@@ -32,9 +36,33 @@ export default function FavouritePage() {
     fetchFavorites();
   }, []);
 
-  const handleUnfavourite = () => {
-    console.log("unfavourite run")
-  }
+
+
+
+  const handleUnfavourite = async (productId) => {
+    const token = localStorage.getItem("token");
+    console.log("token from deleteFav = ",token)
+    try {
+        await axios.delete("http://localhost:3000/deleteFav", {
+        data: { productId: productId },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      setData((prevData) => prevData.filter((items)=>items._id !== productId))
+     
+    } catch (error) {
+      console.error("Delete failed:", error.response?.data || error.message);
+    }
+  };
+
+
+  useEffect(()=>{
+    setCount(data.length)
+  },[data])
+
+
 
   return (
     <div className="w-[90vw] m-auto">
@@ -50,7 +78,7 @@ export default function FavouritePage() {
               <FontAwesomeIcon
                 className="relative left-[7vw] top-5 z-30 text-[2vw]"
                 icon={faXmark}
-                onClick={() => { handleUnfavourite() }}
+                onClick={() => handleUnfavourite(ele._id) }
               />
 
               <div className="relative group">
