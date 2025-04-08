@@ -8,6 +8,7 @@ const searchBarData = require('./Routes/searchBarData.Route')
 const addProducts = require('./Routes/addProduct.Route')
 const registration = require('./Routes/registration.Route')
 const login = require('./Routes/login.Route')
+const deleteFav = require ('./Routes/deleteFavorite.Route')
 
 const app = express()
 
@@ -22,12 +23,12 @@ app.get('/warmUp', async(req,res)=>{
 })
 
 
-
 app.use('/', searchBarData)
 app.use('/searchData', searchData)
 app.use('/addProduct', addProducts)
 app.use('/register',registration)
 app.use('/login', login)
+app.use('/', deleteFav)
 
 
 
