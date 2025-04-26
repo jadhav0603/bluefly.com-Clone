@@ -62,7 +62,7 @@ const AddCarts = () => {
 
 
   async function handleBuy() {
-    navigate('/Payment')
+    if(cartArray.length > 0){
     const token = localStorage.getItem('token');
     try {
       await axios.delete('https://bluefly-com-clone-6ri4.onrender.com/handleCarts/deleteAllData', {
@@ -72,6 +72,11 @@ const AddCarts = () => {
     } catch (error) {
       console.log("Cart delete error:", error.message);
     }
+    navigate('/Payment')
+  }
+  else{
+    alert("NO DATA FOR CHECKOUT")
+  }
   }
 
 
