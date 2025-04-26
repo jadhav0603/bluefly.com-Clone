@@ -19,7 +19,7 @@ export default function LogedIn() {
             }
 
             try {
-                const res = await axios.get("https://bluefly-com-clone-frontend.onrender.com/login/logedIn", {
+                const res = await axios.get("https://bluefly-com-clone-6ri4.onrender.com/login/logedIn", {
                     headers: {
                         Authorization: `Bearer ${token}` // ✅ Include token in request
                     }
