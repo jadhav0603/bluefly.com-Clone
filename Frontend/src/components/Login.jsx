@@ -24,7 +24,7 @@ export default function Login() {
         e.preventDefault();
         console.log("run")
         try {
-            const response = await axios.post('http://localhost:3000/login/',
+            const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/login/',
                 { email, password })
             console.log("result",response.data)
             localStorage.setItem('token', response.data.token);
