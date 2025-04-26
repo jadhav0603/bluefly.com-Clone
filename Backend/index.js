@@ -9,6 +9,8 @@ const addProducts = require('./Routes/addProduct.Route')
 const registration = require('./Routes/registration.Route')
 const login = require('./Routes/login.Route')
 const deleteFav = require ('./Routes/deleteFavorite.Route')
+const handleCarts = require('./Routes/handleCarts.Route')
+
 
 const app = express()
 
@@ -29,6 +31,7 @@ app.use('/addProduct', addProducts)
 app.use('/register',registration)
 app.use('/login', login)
 app.use('/', deleteFav)
+app.use('/handleCarts',handleCarts)
 
 
 

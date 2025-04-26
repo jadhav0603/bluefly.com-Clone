@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const favoriteSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // User reference
+const productSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     id: { type: Number, required: true },
     gender: { type: String, required: true },
     category: { type: String, required: true },
@@ -25,5 +25,10 @@ const favoriteSchema = new mongoose.Schema({
     image2: { type: String, required: true }
 }, { timestamps: true });
 
-const Favorite = mongoose.model("favourites", favoriteSchema);
-module.exports = Favorite;
+
+
+const Favorite = mongoose.model("favourites", productSchema);
+const AddToCarts = mongoose.model("addToCarts", productSchema);
+
+
+module.exports = { Favorite, AddToCarts };

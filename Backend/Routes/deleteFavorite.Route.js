@@ -1,6 +1,6 @@
 const express = require('express')
 const authMiddleware = require('../middleware/authMiddleware')
-const Favorite = require('../models/productSchema')
+const {Favorite,AddToCarts} = require('../models/productSchema')
 
 const router = express.Router()
 
