@@ -18,7 +18,7 @@ export default function FavouriteButton() {
 
         async function fetchFavorites(){
             const token = localStorage.getItem('token')
-            console.log(token)
+            // console.log(token)
             
             const response = await axios.get(
                 "http://localhost:3000/addProduct/getFavouriteData",

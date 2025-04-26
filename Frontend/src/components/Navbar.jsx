@@ -94,7 +94,7 @@ const filterNavSearchData = async (key, value, productCategory) => {
 
         <div className="flex gap-10 pt-[20px] text-[1.5vw]">
             <FontAwesomeIcon icon={faUser} onClick={()=>handleLogin()} />
-            <FontAwesomeIcon icon={faBagShopping} />
+            <FontAwesomeIcon icon={faBagShopping} onClick={()=>Navigate('/AddCarts')} />
         </div>
       </div> 
       

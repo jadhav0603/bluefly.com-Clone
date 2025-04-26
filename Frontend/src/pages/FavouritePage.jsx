@@ -3,18 +3,19 @@ import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { CountContext } from "../components/UseContextHook";
+import { useNavigate } from "react-router-dom";
 
 export default function FavouritePage() {
   const [data, setData] = useState([])
   const { count,setCount } = useContext(CountContext)
 
-
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchFavorites() {
       try {
         const token = localStorage.getItem('token')
-        console.log(token)
+        // console.log(token)
 
         const response = await axios.get(
           "http://localhost:3000/addProduct/getFavouriteData",
@@ -25,7 +26,7 @@ export default function FavouritePage() {
           }
         );
 
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setData(response.data.data);
 
       }
@@ -41,7 +42,7 @@ export default function FavouritePage() {
 
   const handleUnfavourite = async (productId) => {
     const token = localStorage.getItem("token");
-    console.log("token from deleteFav = ",token)
+    // console.log("token from deleteFav = ",token)
     try {
         await axios.delete("http://localhost:3000/deleteFav", {
         data: { productId: productId },
@@ -61,6 +62,31 @@ export default function FavouritePage() {
   useEffect(()=>{
     setCount(data.length)
   },[data])
+
+
+
+  const handleCarts = async (ele)=>{
+    const token = localStorage.getItem('token')
+    console.log('token = ', token)
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/handleCarts/addToCart',
+        ele,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+      
+        handleUnfavourite(ele._id)
+        setData((prevData) => prevData.filter((items)=>items._id !== ele._id))
+        navigate('/AddCarts')
+
+    } catch (error) {
+      console.log("carts errors = ", error.message)
+    }
+    
+  }
 
 
 
@@ -103,7 +129,7 @@ export default function FavouritePage() {
               <span className="text-[1.5vw] p-[5px]">${ele.sellingPrice}</span>
               <p>{ele.color.toUpperCase()} COLOR AVAILABLE </p>
 
-              <button className="bg-black text-white w-[95%] p-[10px] rounded-lg mt-[10px] "> ADD TO CARTS </button>
+              <button className="bg-black text-white w-[95%] p-[10px] rounded-lg mt-[10px] " onClick={()=>handleCarts(ele)}> ADD TO CARTS </button>
             </div>
           </div>
         ))

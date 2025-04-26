@@ -7,6 +7,8 @@ import LoginModel from "./LoginModel"
 import Login from './Login'
 import Registers from "./Registers"
 import FavouritePage from "../pages/favouritePage"
+import AddCarts from "../pages/AddCarts"
+
 
 function AllRoutes(){
     return(
@@ -19,6 +21,7 @@ function AllRoutes(){
             <Route path="/Login" element={<Login />} />
             <Route path="/Registers" element={<Registers />} />
             <Route path="/FavouritePage" element={<FavouritePage />} />
+            <Route path="/AddCarts" element= {<AddCarts />} />
         </Routes>
 
 )
