@@ -7,7 +7,7 @@ import axios from 'axios';
 const AddCarts = () => {
   const [cartArray, setCartArray] = useState([]);
   const [quantities, setQuantities] = useState({});
-  
+
   const navigate = useNavigate();
 
 
@@ -25,7 +25,7 @@ const AddCarts = () => {
         initialQuantities[item._id] = 1;
       });
       setQuantities(initialQuantities);
-      
+
     } catch (error) {
       console.error("Failed to fetch cart data:", error.message);
     }
@@ -33,9 +33,9 @@ const AddCarts = () => {
 
   useEffect(() => {
     cartData();
-}, []);
+  }, []);
 
-console.log("quantities = ",quantities)
+  console.log("quantities = ", quantities)
 
 
   const updateQuantity = (id, type) => {
@@ -61,6 +61,20 @@ console.log("quantities = ",quantities)
   };
 
 
+  async function handleBuy() {
+    navigate('/Payment')
+    const token = localStorage.getItem('token');
+    try {
+      await axios.delete('https://bluefly-com-clone-6ri4.onrender.com/handleCarts/deleteAllData', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      cartData();
+    } catch (error) {
+      console.log("Cart delete error:", error.message);
+    }
+  }
+
+
   const finalTotal = cartArray.reduce((acc, item) => {
     const qty = quantities[item._id] || 1;
     return acc + item.sellingPrice * qty;
@@ -82,12 +96,15 @@ console.log("quantities = ",quantities)
             <thead>
               <tr className='border-b border-b-black text-left'>
                 <th className='w-[25vw]'>PRODUCT</th>
-                <th className='w-[15vw]'>QUANTITY</th>
-                <th className='w-[15vw]'>TOTAL</th>
+                <th className='w-[15vw] text-center'>QUANTITY</th>
+                <th className='w-[15vw] text-center'>TOTAL</th>
               </tr>
             </thead>
             <tbody>
-              {cartArray.map((ele, i) => (
+              {cartArray.length === 0 ? 
+              <p className='pt-[1vw]'>YOUR CART IS EMPTY</p> 
+              :
+              cartArray.map((ele, i) => (
                 <tr key={i} className='border'>
                   <td className='flex gap-5 text-[1vw] items-center'>
                     <img className='w-[5vw] p-[10px]' src={ele.image1} alt={ele.productName} />
@@ -122,7 +139,7 @@ console.log("quantities = ",quantities)
         <div className='w-[34vw] border p-[2vw] text-[1vw]'>
           <h1 className='flex font-serif text-[2.5vw] justify-center m-[20px]'>Subtotal ${finalTotal.toFixed(2)}</h1>
           <p className='flex justify-center text-[1vw]'>Taxes and shipping calculated at checkout</p>
-          <button className='bg-black text-white text-[1.5vw] w-full rounded-[20px] mt-[40px] mb-[50px] p-[3px]'>CHECKOUT</button>
+          <button className='bg-black text-white text-[1.5vw] w-full rounded-[20px] mt-[40px] mb-[50px] p-[3px]' onClick={() => handleBuy()}>CHECKOUT</button>
           <p>4 interest-free installments or from $18.68/mo with Shop Pay</p>
           <u>Check your purchasing power</u>
 

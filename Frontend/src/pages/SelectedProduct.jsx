@@ -1,10 +1,14 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { useState } from "react"
+import axios from "axios"
+
 
 
 export default function SelectedProduct() {
     const location = useLocation()
     const data = [location.state]
+
+    // const navigate = useNavigate()
 
     const [image, setImage] = useState(data[0].image1)
     const [isBorder1active, setIsBorder1active] = useState(true)
@@ -20,9 +24,35 @@ export default function SelectedProduct() {
         setIsBorder2active((prev) => !prev)
     }
 
-    function handleBuy(){
-        Navigate('/Payment')
-    }
+    // function handleBuy(){
+    //     Navigate('/Payment')
+    // }
+
+
+    const handleCarts = async (ele)=>{
+        const token = localStorage.getItem('token')
+        console.log('token = ', token)
+        try {
+          const response = await axios.post(
+            'https://bluefly-com-clone-6ri4.onrender.com/handleCarts/addToCart',
+            ele,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              }
+            })
+          
+            console.log(response)
+            // handleUnfavourite(ele._id)
+            // setData((prevData) => prevData.filter((items)=>items._id !== ele._id))
+            Navigate('/AddCarts')
+    
+        } catch (error) {
+          console.log("carts errors = ", error.message)
+        }
+        
+      }
+
 
     return (
 
@@ -91,9 +121,9 @@ export default function SelectedProduct() {
 
                 <button 
                     className="w-[100%] bg-black text-white py-2 px-6 rounded hover:bg-gray-800 transition"
-                    onClick={()=>handleBuy()}
+                    onClick={()=>handleCarts(data[0])}
                 >
-                    BUY NOW
+                    ADD TO CART
                 </button>
 
 
