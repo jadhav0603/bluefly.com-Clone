@@ -14,7 +14,7 @@ const AddCarts = () => {
   async function cartData() {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://localhost:3000/handleCarts/getCartData", {
+      const response = await axios.get("https://bluefly-com-clone-frontend.onrender.com/handleCarts/getCartData", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCartArray(response.data);
@@ -50,7 +50,7 @@ console.log("quantities = ",quantities)
   const handleDeleteCart = async (productId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete('http://localhost:3000/handleCarts/deleteCartData', {
+      await axios.delete('https://bluefly-com-clone-frontend.onrender.com/handleCarts/deleteCartData', {
         data: { Id: productId },
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -18,7 +18,7 @@ export default function FavouritePage() {
         // console.log(token)
 
         const response = await axios.get(
-          "http://localhost:3000/addProduct/getFavouriteData",
+          "https://bluefly-com-clone-frontend.onrender.com/addProduct/getFavouriteData",
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -44,7 +44,7 @@ export default function FavouritePage() {
     const token = localStorage.getItem("token");
     // console.log("token from deleteFav = ",token)
     try {
-        await axios.delete("http://localhost:3000/deleteFav", {
+        await axios.delete("https://bluefly-com-clone-frontend.onrender.com/deleteFav", {
         data: { productId: productId },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export default function FavouritePage() {
     console.log('token = ', token)
     try {
       const response = await axios.post(
-        'http://localhost:3000/handleCarts/addToCart',
+        'https://bluefly-com-clone-frontend.onrender.com/handleCarts/addToCart',
         ele,
         {
           headers: {

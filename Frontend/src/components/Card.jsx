@@ -28,7 +28,7 @@ export default function Card({ response }) {
       try {
         const token = localStorage.getItem('token')
         const res = await axios.get(
-          "http://localhost:3000/addProduct/getFavouriteData",
+          "https://bluefly-com-clone-frontend.onrender.com/addProduct/getFavouriteData",
           {
             headers:{
             Authorization:`Bearer ${token}`
