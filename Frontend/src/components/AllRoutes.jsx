@@ -6,7 +6,7 @@ import Payment from "../pages/payment"
 import LoginModel from "./LoginModel"
 import Login from './Login'
 import Registers from "./Registers"
-import FavouritePage from "../pages/favouritePage"
+import FavouritePage from "../pages/FavouritePage"
 import AddCarts from "../pages/AddCarts"
 
 
