@@ -1,110 +1,136 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faUser,faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faUser,
+  faBagShopping,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import NavbarRoutes from '../components/NavbarRoutes'
+import NavbarRoutes from "../components/NavbarRoutes";
 import axios from "axios";
 import { useState } from "react";
 
-
 function Navbar() {
+  const [inputVal, setInputVal] = useState();
 
-  const [inputVal,setInputVal] = useState()
+  const Navigate = useNavigate();
 
- const Navigate = useNavigate()
+  const handleNavSearchData = async () => {
+    const response = await axios.get(
+      `https://bluefly-com-clone-6ri4.onrender.com/${inputVal}`
+    );
+    console.log(response.data);
+    const data = [];
 
- const handleNavSearchData = async () => {
-  const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/${inputVal}`);
-  console.log(response.data);
-  const data = []
-
-  for(let i=0; i<response.data.length; i++){
-    for(let j=0; j<response.data[i].data.length; j++){
-      data.push(response.data[i].data[j])
+    for (let i = 0; i < response.data.length; i++) {
+      for (let j = 0; j < response.data[i].data.length; j++) {
+        data.push(response.data[i].data[j]);
+      }
     }
-  }
 
-  // console.log("data array = ",data)
+    // console.log("data array = ",data)
 
-  Navigate('/SearchedDataPage', { state: { data } })
+    Navigate("/SearchedDataPage", { state: { data } });
 
-  setInputVal("")
+    setInputVal("");
+  };
 
-};
+  const filterNavSearchData = async (key, value, productCategory) => {
+    const response = await axios.get(
+      `https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`
+    );
+    console.log(response.data);
+    const data = [];
 
+    response.data.map((ele) => {
+      if (ele.category === productCategory || productCategory === "allData") {
+        data.push(ele);
+      }
+    });
 
-const filterNavSearchData = async (key, value, productCategory) => {
-  const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`);
-  console.log(response.data);
-  const data = []
+    Navigate("/SearchedDataPage", { state: { data } });
+  };
 
-  response.data.map((ele)=>{
-    if(ele.category === productCategory || productCategory === "allData"){
-      data.push(ele)
+  const handleHome = () => {
+    Navigate("/");
+    // console.log("run home")
+  };
+
+  const handleLogin = () => {
+    //  console.log("run login")
+    Navigate("/LoginModel");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleNavSearchData();
     }
-  })
-
-  Navigate('/SearchedDataPage', { state: { data } })
-
-};
-
- 
- const handleHome = ()=>{
-  Navigate('/')
-  // console.log("run home")
- }
-
- const handleLogin = ()=>{
-  //  console.log("run login")
-  Navigate('/LoginModel')
- }
-
- const handleKeyPress = (event) =>{
-    if(event.key === "Enter"){
-      handleNavSearchData()
-    }
- }
-
+  };
 
   return (
     <div>
-      <div className="bg-black w-[98.7vw] text-[1.1vw] text-white py-3.5 flex justify-center">
+      <div className="bg-black text-xs lg:text-lg text-white py-3.5 flex justify-center">
         <p>FREE STANDARD SHIPPING - ANY ORDER OVER $99. SHOP NOW</p>
       </div>
 
-      <div className="flex pt-[30px] px-[3vw]  border justify-between">
-        <div className="w-[32vw] h-[100px] text-[1.6vw] text-gray-800 font-semibold pt-[68px] flex gap-[1vw]">
-          <span className="hover:border-b border-black" onClick={() => filterNavSearchData("gender","Female","allData")}> WOMEN </span>
-          <span className="hover:border-b border-black" onClick={() => filterNavSearchData("gender","Male","allData")} > MEN </span>
-        </div>
-
-        <div className="flex">
-          <img className="w-[22vw] h-fit" src="./image/Home/img103.webp" onClick={()=>handleHome()} />
-          <input 
-            type="text"
-            className="w-[23vw] h-fit mx-[20px] mt-[35px] border-b border-black focus:outline-none" 
-            value={inputVal} 
-            onChange={(e)=>setInputVal(e.target.value)}
-            onKeyDown={handleKeyPress}
+      <div className="flex flex-col px-[3vw] border justify-between">
+        
+        <div className="flex flex-col w-full lg:flex-row justify-around text-xs sm:text-sm md:text-base lg:text-lg text-gray-800 font-semibold gap-[2vw] md:gap-[1vw]">
+          
+          <div className="m-auto p-2 lg:mr-[1vw]">
+            <img
+              className="w-[50vw] lg:w-[22vw] h-fit"
+              src="./image/Home/img103.webp"
+              onClick={() => handleHome()}
             />
-          <FontAwesomeIcon className="relative right-12 top-6 text-[1.7vw]" 
-          onClick={()=>handleNavSearchData()}
-          icon={faMagnifyingGlass}
-          />
+          </div>
+
+          <div className="flex w-full pb-5 lg:w-[35vw] justify-around  p-0 m-0">
+            <div className="flex items-center">
+              <input
+                type="text"
+                className="w-[60vw] lg:w-[23vw] lg:mx-[20px] mt-[35px] border-b border-black focus:outline-none"
+                value={inputVal}
+                onChange={(e) => setInputVal(e.target.value)}
+                onKeyDown={handleKeyPress}
+              />
+              <FontAwesomeIcon
+                className="relative right-5 lg:right-10 top-3 text-sm lg:text-xl"
+                onClick={() => handleNavSearchData()}
+                icon={faMagnifyingGlass}
+              />
+            </div>
+
+            <div className="flex gap-5 lg:gap-10 text-lg lg:text-xl mt-8">
+              <FontAwesomeIcon icon={faUser} onClick={() => handleLogin()} />
+              <FontAwesomeIcon
+                icon={faBagShopping}
+                onClick={() => Navigate("/AddCarts")}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="flex gap-10 pt-[20px] text-[1.5vw]">
-            <FontAwesomeIcon icon={faUser} onClick={()=>handleLogin()} />
-            <FontAwesomeIcon icon={faBagShopping} onClick={()=>Navigate('/AddCarts')} />
+        <div className="flex lg:text-2xl text-sm lg:font-semibold gap-3">
+          <span
+            className="hover:border-b border-black"
+            onClick={() => filterNavSearchData("gender", "Female", "allData")}
+          >
+            WOMEN
+          </span>
+          <span
+            className="hover:border-b border-black"
+            onClick={() => filterNavSearchData("gender", "Male", "allData")}
+          >
+            MEN
+          </span>
         </div>
-      </div> 
-      
+      </div>
+
       <NavbarRoutes />
-      
+
       <div className="flex justify-center w-100vw">
         <img className="w-[94.5vw] p-[10px]" src="./image/Home/img105.webp" />
       </div>
-
-
     </div>
   );
 }

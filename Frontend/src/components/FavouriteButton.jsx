@@ -34,7 +34,10 @@ export default function FavouriteButton() {
         }
 
         fetchFavorites()
-
+        
+        if(count == 0){
+            setIsVisible(false)
+        }
 
         if(!token){
             setIsVisible(false)
