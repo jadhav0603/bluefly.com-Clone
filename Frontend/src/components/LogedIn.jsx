@@ -45,15 +45,15 @@ export default function LogedIn() {
     return (
         <div className="border w-[93vw] m-auto">
             <div className="flex justify-between px-12 py-5">
-                <h1 className="text-[2.5vw]">ACCOUNT</h1>
+                <h1 className="text-lg">ACCOUNT</h1>
                 <div className="flex w-32 justify-between ">
                     <div>
-                        <p onClick={handleLogout}>LOGOUT </p>
+                        <p onClick={handleLogout} className="text-sm">LOGOUT </p>
                     </div>
 
                     <div>
                         <FontAwesomeIcon
-                            className="relative right-7 text-[1.5vw]"
+                            className="relative right-7 text-lg"
                             icon={faArrowRight}
                             onClick={handleLogout}
                         />
@@ -61,13 +61,13 @@ export default function LogedIn() {
                 </div>
             </div>
 
-            <div className="px-12 flex justify-between">
-                <div className="text-[2vw]">
+            <div className="px-12 flex flex-col lg:flex-row lg:justify-between">
+                <div className="text-sm pb-[2vw]">
                     <h1>ORDER HISTORY</h1>
                 </div>
 
-                <div className="border border-black w-[25vw] py-8">
-                    <h1 className="text-[2vw] flex justify-center px-5 py-2">ACCOUNT DETAILS</h1>
+                <div className="border border-black lg:w-[25vw] py-8">
+                    <h1 className="text-sm flex justify-center px-5 py-2">ACCOUNT DETAILS</h1>
                     {userData ? (
                         <>
                             <p className="flex justify-center">{userData.firstName} {userData.lastName}</p>

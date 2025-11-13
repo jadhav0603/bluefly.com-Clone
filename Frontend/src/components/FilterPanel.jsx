@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 const FilterPanel = ({filters,setFilters,response}) => {
   const [brands, setBrands] = useState([]);
-  const [isOpen, setIsOpen] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const brandsArray = []
   useEffect(() => {
@@ -40,12 +40,23 @@ const FilterPanel = ({filters,setFilters,response}) => {
     }));
   };
 
-  return (
-    <div className="w-[20vw] p-4 ">
-      <h2 className="text-[2vw] uppercase py-4 border-b border-gray-300">Filter By</h2>
+  const handleIsOpen = ()=>{
+    console.log("run handle isOpen")
+    setIsOpen(!isOpen)
+  }
 
+  return (
+    <div className="md:w-[20vw] p-4 text-sm lg:text-lg border-b border-gray-300">
+      <div className="flex flex-row justify-between" onClick={()=>handleIsOpen()}>
+        <h2 className="uppercase font-semibold">Filter By</h2>
+        <div>
+          {isOpen ? <span className="text-xl">&#9662;</span> : <span className="text-xl">&#9652;</span> }
+        </div>
+      </div>
+
+    <div className={`${isOpen ? "max-h-none opacity-100" : "max-h-0 opacity-0" } md:max-h-none md:opacity-100`} >
       {/* Option 1: Brand */}
-      <div>
+        <div className="">
         <button
           onClick={() => toggleDropdown("brand")}
           className="flex justify-between w-full py-4 border-b border-gray-300 text-left"
@@ -218,6 +229,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
     </div>
   )}
 </div>
+    </div>
 
 
 

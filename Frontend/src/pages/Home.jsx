@@ -37,8 +37,8 @@ else{
     <div className="">
       <Slider />
       <div className="border w-[93vw] m-[3vw] ">
-        <h1 className="text-[3vw] py-[3.5vw]  flex justify-center">SHOP BY</h1>
-        <div className="grid grid-cols-4 justify-center gap-y-20 px-[3vw] ">
+        <h1 className="text-sm lg:text-3xl py-[3.5vw]  flex justify-center">SHOP BY</h1>
+        <div className="lg:grid lg:grid-cols-4 gap-5 justify-center gap-y-20 px-[3vw] ">
           <div
             onClick={() =>
               handleNavSearchData("category", "Handbags", "Female")

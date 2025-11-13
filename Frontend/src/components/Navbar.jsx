@@ -11,10 +11,12 @@ import { useState } from "react";
 
 function Navbar() {
   const [inputVal, setInputVal] = useState();
+  const [isLoading, setIsLoading] = useState(false)
 
   const Navigate = useNavigate();
 
   const handleNavSearchData = async () => {
+    setIsLoading(true)
     const response = await axios.get(
       `https://bluefly-com-clone-6ri4.onrender.com/${inputVal}`
     );
@@ -27,9 +29,10 @@ function Navbar() {
       }
     }
 
+    setIsLoading(false)
     // console.log("data array = ",data)
 
-    Navigate("/SearchedDataPage", { state: { data } });
+    Navigate("/SearchedDataPage", { state: { isLoading,data } });
 
     setInputVal("");
   };
@@ -67,7 +70,7 @@ function Navbar() {
   };
 
   return (
-    <div>
+    <div >
       <div className="bg-black text-xs lg:text-lg text-white py-3.5 flex justify-center">
         <p>FREE STANDARD SHIPPING - ANY ORDER OVER $99. SHOP NOW</p>
       </div>

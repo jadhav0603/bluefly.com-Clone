@@ -88,15 +88,15 @@ const AddCarts = () => {
   return (
     <div className='w-[90vw] m-auto uppercase pb-[10px]'>
       <div className='flex justify-between p-[20px]'>
-        <h1 className='font-serif text-[3vw]'>CART</h1>
-        <p onClick={() => navigate('/')} className='text-[1.5vw] cursor-pointer'>
+        <h1 className='font-serif text-xl'>CART</h1>
+        <p onClick={() => navigate('/')} className='text-sm cursor-pointer'>
           CONTINUE SHOPPING &nbsp;
-          <FontAwesomeIcon className="relative text-[1.5vw]" icon={faArrowRight} />
+          <FontAwesomeIcon className="relative text-sm" icon={faArrowRight} />
         </p>
       </div>
 
-      <div className='flex gap-[50px]'>
-        <div className='w-[60vw]'>
+      <div className='flex flex-col lg:flex-row gap-[50px]'>
+        <div className=''>
           <table className="border-separate border-spacing-y-4 w-full">
             <thead>
               <tr className='border-b border-b-black text-left'>
@@ -111,8 +111,8 @@ const AddCarts = () => {
               :
               cartArray.map((ele, i) => (
                 <tr key={i} className='border'>
-                  <td className='flex gap-5 text-[1vw] items-center'>
-                    <img className='w-[5vw] p-[10px]' src={ele.image1} alt={ele.productName} />
+                  <td className='flex flex-col lg:flex-row gap-5 text-sm items-center'>
+                    <img className='lg:w-[5vw] w-[20vw] lg:p-[10px]' src={ele.image1} alt={ele.productName} />
                     <div>
                       <p>{ele.productName}</p>
                       <p>${ele.sellingPrice}</p>
@@ -121,14 +121,14 @@ const AddCarts = () => {
                   </td>
 
                   <td>
-                    <div className="flex justify-center items-center">
-                      <div className='border w-[7vw] rounded-[15px] flex justify-around'>
+                    <div className="flex flex-col justify-center items-center">
+                      <div className='border lg:w-[7vw] w-[12vw] rounded-[15px] flex justify-around'>
                         <button onClick={() => updateQuantity(ele._id, 'dec')}>-</button>
                         <span>{quantities[ele._id] || 1}</span>
                         <button onClick={() => updateQuantity(ele._id, 'inc')}>+</button>
                       </div>
                     </div>
-                    <p className='w-[10vw] text-center underline text-[1vw] cursor-pointer' onClick={() => handleDeleteCart(ele._id)}>remove</p>
+                    <p className='w-[10vw] text-center underline text-sm cursor-pointer flex justify-center w-full' onClick={() => handleDeleteCart(ele._id)}>remove</p>
                   </td>
 
                   <td>
@@ -141,18 +141,18 @@ const AddCarts = () => {
         </div>
 
 
-        <div className='w-[34vw] border p-[2vw] text-[1vw]'>
-          <h1 className='flex font-serif text-[2.5vw] justify-center m-[20px]'>Subtotal ${finalTotal.toFixed(2)}</h1>
-          <p className='flex justify-center text-[1vw]'>Taxes and shipping calculated at checkout</p>
-          <button className='bg-black text-white text-[1.5vw] w-full rounded-[20px] mt-[40px] mb-[50px] p-[3px]' onClick={() => handleBuy()}>CHECKOUT</button>
+        <div className='lg:w-[34vw] border p-[2vw] text-sm'>
+          <h1 className='flex font-serif text-xl justify-center m-[20px]'>Subtotal ${finalTotal.toFixed(2)}</h1>
+          <p className='flex justify-center text-sm'>Taxes and shipping calculated at checkout</p>
+          <button className='bg-black text-white text-sm w-full rounded-[20px] mt-[40px] mb-[50px] lg:p-[3px] p-[10px]' onClick={() => handleBuy()}>CHECKOUT</button>
           <p>4 interest-free installments or from $18.68/mo with Shop Pay</p>
           <u>Check your purchasing power</u>
 
           <div className='mt-[100px] flex flex-col items-center'>
             <p>Express options available at checkout</p>
             <div className="flex flex-col justify-center items-center w-[98vw] mb-[50px]">
-              <img className="w-[30vw]" src="./image/Home/footerCards.png" alt="Cards" />
-              <p className="opacity-[50%] text-[1vw]">© 2025, Bluefly Powered by Vijay Jadhav.</p>
+              <img className="lg:w-[30vw]" src="./image/Home/footerCards.png" alt="Cards" />
+              <p className="opacity-[50%] text-sm">© 2025, Bluefly Powered by Vijay Jadhav.</p>
             </div>
           </div>
         </div>
