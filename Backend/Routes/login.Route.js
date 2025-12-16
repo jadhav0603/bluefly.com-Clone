@@ -38,7 +38,7 @@ router.get('/logedIn', authMiddleware, async (req, res) => {
         const userId = new mongoose.Types.ObjectId(req.user.userID); 
 
         const userCollection = mongoose.connection.db.collection('registrations');
-        const user = await userCollection.findOne({ _id: userId }); // ✅ Find user by `_id`
+        const user = await userCollection.findOne({ _id: userId }).lean(); 
 
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });

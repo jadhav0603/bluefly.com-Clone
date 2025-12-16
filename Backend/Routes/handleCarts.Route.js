@@ -4,6 +4,8 @@ const router = express.Router()
 const authMiddleware = require('../middleware/authMiddleware')
 const { Favorite, AddToCarts } = require('../models/productSchema')
 
+
+
 router.post('/addToCart', authMiddleware, async (req, res) => {
     const userId = req.user.userID
     const data = req.body
@@ -37,7 +39,7 @@ router.get('/getCartData', authMiddleware, async (req, res) => {
     }
 
     try {
-        const data = await AddToCarts.find({ userId });
+        const data = await AddToCarts.find({ userId }).lean();
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error: error.message });

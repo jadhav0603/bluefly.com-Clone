@@ -6,12 +6,13 @@ const {Favorite,AddToCarts} = require('../models/productSchema');
 
 const router = express.Router();
 
+
 router.post('/favouriteData', authMiddleware, async (req, res) => {
     const data = req.body;
     const userId = req.user.userID; 
 
     try {
-        const existingFav = await Favorite.findOne({ userId, productName: data.productName });
+        const existingFav = await Favorite.findOne({ userId, productName: data.productName }).lean();
 
         if (existingFav) {
             await Favorite.deleteOne({ userId, productName: data.productName });
@@ -29,14 +30,15 @@ router.post('/favouriteData', authMiddleware, async (req, res) => {
 });
 
 router.get("/getFavouriteData",authMiddleware, async (req, res) => {
+    
     try {
-        const userId = req.user.userID; // Ensure userId exists in the request
+        const userId = req.user.userID;
         
         if (!userId) {
             return res.status(400).json({ success: false, message: "User ID is required" });
         }
 
-        const data = await Favorite.find({ userId: userId }); 
+        const data = await Favorite.find({ userId: userId }).lean(); 
 
         if (data.length === 0) {
             return res.status(404).json({ success: false, message: "No favorites found" });
