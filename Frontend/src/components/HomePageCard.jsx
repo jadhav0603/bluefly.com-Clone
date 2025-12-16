@@ -4,10 +4,10 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePageCard(props){
     return(
-        <div className="w-[21vw] h-fit flex flex-col  items-center">
-        <img className="h-[22vw]" src={props.url} alt="Image" />
-        <h1 className="text-[3vw] font-semibold text-center">{props.heading}</h1>
-        <span className="mt-4 flex items-center text-[1vw]">
+        <div className="flex flex-col items-center p-[10px]">
+        <img className="lg:h-[22vw] h-[80vw]" src={props.url} alt="Image" />
+        <h1 className="text-sm lg:text-4xl font-semibold text-center">{props.heading}</h1>
+        <span className="flex items-center text-sm lg:text-lg">
           SHOP NOW <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </span>
       </div>

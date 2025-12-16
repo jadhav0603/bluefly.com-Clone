@@ -74,38 +74,39 @@ export default function Card({ response }) {
         }
     } catch (error) {
         console.log("Favourite error - ", error.response ? error.response.data : error.message);
+          navigate('/Login')
     }
 }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
       {response.length > 0 ? (
         response.map((ele, i) => (
-          <div className="w-[14vw] m-[1vw]" key={i}>
+          <div className="lg:w-[14vw] m-[1vw]" key={i}>
             <div className="relative group">
               <img
-                className="w-[12vw] h-fit"
+                className="lg:w-[12vw] w-full h-fit"
                 src={ele.image1}
                 onClick={() => handleCard(ele)}
               />
               <img
-                className="absolute w-[12vw] h-fit top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                className="absolute lg:w-[12vw] w-full h-fit top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                 src={ele.image2}
                 onClick={() => handleCard(ele)}
               />
             </div>
             <FontAwesomeIcon
-              className="text-[1.5vw] relative left-[11vw] bottom-[1vw]"
+              className="text-xl relative lg:left-[11vw] bottom-[1vw]"
               icon={isFavorite(ele) ? solidHeart : regularHeart}
               onClick={() => handleFav(ele)}
             />
-            <h1 className="text-[1.5vw]" onClick={() => handleCard(ele)}>
+            <h1 className="text-sm lg:text-lg" onClick={() => handleCard(ele)}>
               {ele.productName}
             </h1>
             <span className="line-through opacity-70">
               ${ele.orignalPrice}
             </span>
-            <span className="text-[1.5vw] p-[5px]">${ele.sellingPrice}</span>
-            <p>{ele.color.toUpperCase()} COLOR AVAILABLE </p>
+            <span className="p-[5px]">${ele.sellingPrice}</span>
+            <p className="text-xs">{ele.color.toUpperCase()} COLOR AVAILABLE </p>
           </div>
         ))
       ) : (

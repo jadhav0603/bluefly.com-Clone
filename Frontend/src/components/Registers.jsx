@@ -36,12 +36,12 @@ export default function Registers() {
   
     return (
         <div className="w-[93vw] flex flex-col items-center justify-center border py-[2vw] m-[auto]">
-            <h1 className="text-[2.5vw] font-semibold p-[2vw]">CREATE ACCOUNT</h1>
+            <h1 className="text-xl font-semibold p-[2vw]">CREATE ACCOUNT</h1>
             <form onSubmit={handleRegister}>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                 <div className="flex flex-col my-[10px]">
-                        <label className={`relative w-fit ${isFirstFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`}> FIRST NAME </label>
-                        <input className="focus:outline-none border-b border-black w-[35vw] "
+                        <label className={`relative w-fit ${isFirstFocus ? "top-0 text-sm transition-all duration-500" : "top-6 transition-all duration-500"}`}> FIRST NAME </label>
+                        <input className="focus:outline-none border-b border-black lg:w-[35vw] w-full"
                             onFocus={() => setIsFirstFocus(true)}
                             onBlur={(e) => !e.target.value && setIsFirstFocus(false)}
                             value={firstName}
@@ -50,8 +50,8 @@ export default function Registers() {
                             required/>
                     </div>
                     <div className="flex flex-col my-[10px]">
-                    <label className={`relative w-fit ${isLastFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`} >LAST NAME</label>
-                    <input className="focus:outline-none border-b border-black w-[35vw] "
+                    <label className={`relative w-fit ${isLastFocus ? "top-0 text-sm transition-all duration-500" : "top-6 transition-all duration-500"}`} >LAST NAME</label>
+                    <input className="focus:outline-none border-b border-black lg:w-[35vw] w-full"
                         onFocus={() => setIsLastFocus(true)}
                         onBlur={(e) => !e.target.value && setIsLastFocus(false)} 
                         value={lastName}
@@ -61,8 +61,8 @@ export default function Registers() {
                     />
                     </div>
                     <div className="flex flex-col my-[10px]">
-                        <label className={`relative w-fit ${isEmailFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`}> EMAIL </label>
-                        <input className="focus:outline-none border-b border-black w-[35vw] "
+                        <label className={`relative w-fit ${isEmailFocus ? "top-0 text-sm transition-all duration-500" : "top-6 transition-all duration-500"}`}> EMAIL </label>
+                        <input className="focus:outline-none border-b border-black lg:w-[35vw] w-full"
                             onFocus={() => setIsEmailFocus(true)}
                             onBlur={(e) => !e.target.value && setIsEmailFocus(false)}
                             value={email}
@@ -72,8 +72,8 @@ export default function Registers() {
                         />
                     </div>
                     <div className="flex flex-col my-[10px]">
-                    <label className={`relative w-fit ${isPasswordFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`} >PASSWORD</label>
-                    <input className="focus:outline-none border-b border-black w-[35vw] "
+                    <label className={`relative w-fit ${isPasswordFocus ? "top-0 text-sm transition-all duration-500" : "top-6 transition-all duration-500"}`} >PASSWORD</label>
+                    <input className="focus:outline-none border-b border-black lg:w-[35vw] w-full"
                         onFocus={() => setIsPasswordFocus(true)}
                         onBlur={(e) => !e.target.value && setIsPasswordFocus(false)} 
                         value={password}
@@ -84,7 +84,7 @@ export default function Registers() {
                     </div>
                 </div>
 
-                <div className="my-[3vw] text-[0.9vw] flex justify-center">
+                <div className="my-[3vw] text-sm flex justify-center">
 
                 <button className="bg-black text-white py-[6px] px-[15px] rounded-[40%]" type="submit"> CREATE </button>
                 </div>

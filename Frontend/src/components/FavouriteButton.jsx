@@ -34,7 +34,10 @@ export default function FavouriteButton() {
         }
 
         fetchFavorites()
-
+        
+        if(count == 0){
+            setIsVisible(false)
+        }
 
         if(!token){
             setIsVisible(false)
@@ -48,7 +51,7 @@ export default function FavouriteButton() {
         <div onClick={()=>Navigate('/FavouritePage')}>
             {
                 (isVisible) ? <div className="fixed right-10 top-14 z-[1000] rounded-[50%]">
-                    <div className="bg-black w-fit text-white py-[20px] px-[20px] rounded-[50%] text-[1.5vw] flex justify-center shadow-lg ">
+                    <div className="bg-black w-fit text-white py-[20px] px-[20px] rounded-[50%] text-xl flex justify-center shadow-lg ">
                         <FontAwesomeIcon icon={faHeart} />
                     </div>
                     <span

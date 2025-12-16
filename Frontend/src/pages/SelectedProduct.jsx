@@ -48,6 +48,7 @@ export default function SelectedProduct() {
             Navigate('/AddCarts')
     
         } catch (error) {
+            Navigate('/Login')
           console.log("carts errors = ", error.message)
         }
         

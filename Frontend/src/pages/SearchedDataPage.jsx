@@ -5,7 +5,7 @@ import Card from "../components/Card";
 
 export default function SearchedDataPage() {
   const location = useLocation();
-  const { data } = location.state || {};
+  const { isLoading, data } = location.state || {};
   
   // Centralized state for filters and filtered data
   const [filters, setFilters] = useState({
@@ -40,12 +40,14 @@ export default function SearchedDataPage() {
     );
   });
 
+
   return (
+    (isLoading) ? <div>Loading....</div> :
     <div>
-      <h1 className="W-[98vw] text-[3vw] uppercase flex justify-center p-[2vw]">
+      <h1 className="W-[98vw] text-2xl lg:text-4xl uppercase flex justify-center p-[2vw]">
         DESIGNER {data[0]?.category}
       </h1>
-      <div className="flex p-[3vw] gap-10">
+      <div className="lg:flex p-[3vw] gap-10 md:flex">
         <div>
         <FilterPanel
           filters={filters}

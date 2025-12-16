@@ -38,14 +38,14 @@ export default function Login() {
     };
 
     return (
-        <div className="w-[93vw] flex flex-col items-center justify-center border py-[2vw] m-[auto]">
-            <h1 className="text-[2.5vw] font-semibold p-[2vw]">LOG IN</h1>
+        <div className="flex flex-col items-center justify-center border py-[2vw] m-[auto]">
+            <h1 className="text-xl font-semibold p-[2vw]">LOG IN</h1>
             <p className="text-red-600">{error}</p>
             <form onSubmit={handleLogin}>
                 <div className="flex flex-col">
                     <div className="flex flex-col my-[10px]">
-                        <label className={`relative z-0 w-fit ${isEmailFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}`} > EMAIL </label>
-                        <input className="bg-transparent z-30 focus:outline-none border-b border-black w-[35vw] "
+                        <label className={`relative z-0 w-fit ${isEmailFocus ? "top-0 text-xs transition-all duration-500" : "top-6 transition-all duration-500"}`} > EMAIL </label>
+                        <input className="bg-transparent z-30 focus:outline-none border-b border-black lg:w-[35vw] w-full "
                             onFocus={() => setIsEmailFocus(true)}
                             onBlur={(e) => !e.target.value && setIsEmailFocus(false)}
                             value={email}
@@ -55,8 +55,8 @@ export default function Login() {
                         />
                     </div>
                     <div className="flex flex-col my-[10px]">
-                        <label className={`relative z-0 w-fit ${isPasswordFocus ? "top-0 text-[0.9vw] transition-all duration-500" : "top-6 transition-all duration-500"}` } >PASSWORD</label>
-                        <input className="bg-transparent focus:outline-none z-30 border-b border-black w-[35vw] "
+                        <label className={`relative z-0 w-fit ${isPasswordFocus ? "top-0 text-xs transition-all duration-500" : "top-6 transition-all duration-500"}` } >PASSWORD</label>
+                        <input className="bg-transparent focus:outline-none z-30 border-b border-black lg:w-[35vw] w-full"
                             onFocus={() => setIsPasswordFocus(true)}
                             onBlur={(e) => !e.target.value && setIsPasswordFocus(false)}
                             value={password}
@@ -67,7 +67,7 @@ export default function Login() {
                     </div>
                 </div>
 
-                <div className="my-[3vw] gap-[2vw] text-[0.9vw] flex flex-col items-center justify-center">
+                <div className="my-[3vw] gap-[2vw] text-sm flex flex-col items-center justify-center">
                     <p className="w-fit" >FORGOT YOUR PASSWORD</p>
                     <button className="bg-black text-white py-[6px] px-[15px] rounded-[40%]" type="submit"> SIGN IN </button>
                     <p onClick={() => handleRegister()}> CREATE ACCOUNT </p>
