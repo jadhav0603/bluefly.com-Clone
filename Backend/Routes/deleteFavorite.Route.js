@@ -5,6 +5,7 @@ const {Favorite,AddToCarts} = require('../models/productSchema')
 const router = express.Router()
 
 
+
 router.delete('/deleteFav', authMiddleware, async (req, res) => {
     const userId = req.user.userID;
     const { productId } = req.body;
