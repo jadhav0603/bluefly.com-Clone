@@ -18,7 +18,7 @@ router.get("/:key/:value", async(req, res) => {
     const searchData = collectionArray.map(async(ele)=>{
         const Collection_Name = mongoose.connection.db.collection(ele)
 
-        const data = await Collection_Name.find({[key]:value}).toArray();
+        const data = await Collection_Name.find({[key]:value}).limit(20).toArray();
 
         return data
     })
