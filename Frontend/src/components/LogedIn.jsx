@@ -30,7 +30,7 @@ export default function LogedIn() {
 
             } catch (error) {
                 console.error("Error fetching user data:", error.response?.data || error.message);
-                navigate("/Login"); // Redirect to login if unauthorized
+                navigate("/Login"); 
             }
         }
 
@@ -48,7 +48,7 @@ export default function LogedIn() {
                 <h1 className="text-lg">ACCOUNT</h1>
                 <div className="flex w-32 justify-between ">
                     <div>
-                        <p onClick={handleLogout} className="text-sm">LOGOUT </p>
+                        <p onClick={handleLogout} className="text-sm cursor-pointer">LOGOUT </p>
                     </div>
 
                     <div>

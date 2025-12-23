@@ -81,16 +81,18 @@ export default function Card({ response }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
       {response.length > 0 ? (
         response.map((ele, i) => (
-          <div className="lg:w-[14vw] m-[1vw]" key={i}>
+          <div className="lg:w-[14vw] m-[1vw] cursor-pointer" key={i}>
             <div className="relative group">
               <img
-                className="lg:w-[12vw] w-full h-fit"
+                className="lg:w-[12vw] lg:h-fit w-[60vw] h-[70vw]"
                 src={ele.image1}
+                loading="lazy"
                 onClick={() => handleCard(ele)}
               />
               <img
-                className="absolute lg:w-[12vw] w-full h-fit top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                className="absolute lg:w-[12vw] lg:h-fit w-[60vw] h-[70vw] top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                 src={ele.image2}
+                loading="lazy"
                 onClick={() => handleCard(ele)}
               />
             </div>

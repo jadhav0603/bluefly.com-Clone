@@ -45,7 +45,7 @@ function Slider(){
 
 
     return(
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center cursor-pointer">
             <FontAwesomeIcon className="bg-white relative left-10 p-2.5 rounded-[50%] text-[1vw]" icon={faLessThan} onClick={()=>{if (index >=1) { setIndex(index-1)} else{setIndex(arr.length-1)}}} />
             <img className="w-[93vw]" src={arr[index]} onClick={()=>handleData("category", "Handbags")}/>
             <FontAwesomeIcon className="bg-white relative right-10 p-2.5 rounded-[50%] text-[1vw]" icon={faGreaterThan} onClick={()=>{if (index < arr.length-1) { setIndex(index+1)} else{setIndex(0)}}} />

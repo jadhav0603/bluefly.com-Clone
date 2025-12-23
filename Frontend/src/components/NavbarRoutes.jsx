@@ -119,12 +119,14 @@ function Routes() {
   };
 
 
-  (isLoading)
+  if(isLoading){
+    return <p className="text-lg font-semibold animate-pulse">L O A D I N G . . .</p>
+  }
 
 
   return (
     <div className="flex flex-col flex-wrap justify-center uppercase ">
-      <ul className="text-xs lg:text-lg flex flex-wrap justify-center gap-[4vw] font-semibold p-[2vw] text-gray-800">
+      <ul className="text-xs lg:text-lg cursor-pointer flex flex-wrap justify-center gap-[4vw] font-semibold p-[2vw] text-gray-800">
         <li className="relative group">
           <div className="">DESIGNERS</div>
 

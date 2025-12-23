@@ -14,20 +14,19 @@ export default function Login() {
 
     const [error, setError] = useState("")
 
-
-    const handleRegister = () => {
-        navigate('/Registers')
-    }
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("run")
+   
         try {
+            setIsLoading(true)
             const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/login/',
                 { email, password })
             console.log("result",response.data)
             localStorage.setItem('token', response.data.token);
+            setIsLoading(false)
             navigate('/');
         } catch (error) {
             console.error(error.response.data.message);
@@ -36,6 +35,22 @@ export default function Login() {
             setPassword("")
         }
     };
+
+
+    const handleRegister = () => {
+        navigate('/Registers')
+    }
+
+    const handleForgetPass = () => {
+        // navigate('/Registers')
+    }
+
+
+    if(isLoading) {
+        return( 
+            <p className="flex flex-col items-center justify-center border py-[2vw] m-[auto]" >L O A D I N G . . .</p>
+        ) 
+    }
 
     return (
         <div className="flex flex-col items-center justify-center border py-[2vw] m-[auto]">
@@ -68,9 +83,9 @@ export default function Login() {
                 </div>
 
                 <div className="my-[3vw] gap-[2vw] text-sm flex flex-col items-center justify-center">
-                    <p className="w-fit" >FORGOT YOUR PASSWORD</p>
+                    <p className="w-fit cursor-pointer" onClick={()=>handleForgetPass()} >FORGOT YOUR PASSWORD</p>
                     <button className="bg-black text-white py-[6px] px-[15px] rounded-[40%]" type="submit"> SIGN IN </button>
-                    <p onClick={() => handleRegister()}> CREATE ACCOUNT </p>
+                    <p className="cursor-pointer" onClick={() => handleRegister()}> CREATE ACCOUNT </p>
                 </div>
             </form>
         </div>

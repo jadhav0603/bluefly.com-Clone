@@ -81,7 +81,7 @@ function Navbar() {
           
           <div className="m-auto p-2 lg:mr-[1vw]">
             <img
-              className="w-[50vw] lg:w-[22vw] h-fit"
+              className="w-[50vw] lg:w-[22vw] h-fit cursor-pointer"
               src="./image/Home/img103.webp"
               onClick={() => handleHome()}
             />
@@ -97,13 +97,13 @@ function Navbar() {
                 onKeyDown={handleKeyPress}
               />
               <FontAwesomeIcon
-                className="relative right-5 lg:right-10 top-3 text-sm lg:text-xl"
+                className="relative cursor-pointer right-5 lg:right-10 top-3 text-sm lg:text-xl"
                 onClick={() => handleNavSearchData()}
                 icon={faMagnifyingGlass}
               />
             </div>
 
-            <div className="flex gap-5 lg:gap-10 text-lg lg:text-xl mt-8">
+            <div className="flex cursor-pointer gap-5 lg:gap-10 text-lg lg:text-xl mt-8">
               <FontAwesomeIcon icon={faUser} onClick={() => handleLogin()} />
               <FontAwesomeIcon
                 icon={faBagShopping}
@@ -115,13 +115,13 @@ function Navbar() {
 
         <div className="flex lg:text-2xl text-sm lg:font-semibold gap-3">
           <span
-            className="hover:border-b border-black"
+            className="hover:border-b border-black cursor-pointer"
             onClick={() => filterNavSearchData("gender", "Female", "allData")}
           >
             WOMEN
           </span>
           <span
-            className="hover:border-b border-black"
+            className="hover:border-b border-black cursor-pointer"
             onClick={() => filterNavSearchData("gender", "Male", "allData")}
           >
             MEN

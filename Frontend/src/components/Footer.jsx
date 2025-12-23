@@ -104,7 +104,7 @@ export default function Footer() {
                 onBlur={(e) => !e.target.value && setIsFocus(false)}
               />
               <FontAwesomeIcon
-                className="relative right-7 text-sm"
+                className="cursor-pointer relative right-7 text-sm"
                 icon={faArrowRight}
               />
             </div>
