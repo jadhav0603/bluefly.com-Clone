@@ -3,41 +3,85 @@ const mongoose = require("mongoose");
 
 const router = express.Router();
 
-router.get("/:key/:value", async(req, res) => {
-  const { key, value } = req.params;
+// router.get("/:key/:value", async(req, res) => {
+//   const { key, value } = req.params;
 
-  const collectionArray = [
-    "clothings",
-    "handbags",
-    "jewelrys",
-    "shoes",
-    "sunglasses",
-  ];
+//   const collectionArray = [
+//     "clothings",
+//     "handbags",
+//     "jewelrys",
+//     "shoes",
+//     "sunglasses",
+//   ];
+
+//   try {
+//     const searchData = collectionArray.map(async(ele)=>{
+//         const Collection_Name = mongoose.connection.db.collection(ele)
+//         const page = parseInt(req.query.page) || 1
+//         const skip = (page - 1) * 12
+//         const totalCount = Collection_Name.countDocuments
+
+//         const data = await Collection_Name.find(
+//           {[key]:value}
+//         )
+//         .skip(skip)
+//         .limit(12)
+//         .toArray();
+
+//         return data
+//     })
+
+//     const result = (await Promise.all(searchData)).flat();
+    
+//     res.status(200).json({result, totalPages : Math.ceil(totalCount / 12)})
+
+
+//   } catch (error) {
+//     res.status(500).json({err_msg: error})
+//   }
+// });
+
+
+
+router.get("/:key/:value", async (req, res) => {
+  const { key, value } = req.params;
+  const page = parseInt(req.query.page) || 1;
+  const limit = 12;
+  const skip = (page - 1) * limit;
+
+  const collections = ["clothings", "handbags", "jewelrys", "shoes", "sunglasses"];
 
   try {
-    const searchData = collectionArray.map(async(ele)=>{
-        const Collection_Name = mongoose.connection.db.collection(ele)
-        const page = parseInt(req.query.page) || 1
-        const skip = (page - 1) * 12
-        const totalCount = Collection_Name.countDocuments
+    let allResults = [];
+    let totalCount = 0;
 
-        const data = await Collection_Name.find(
-          {[key]:value}
-        )
+    for (const name of collections) {
+      const collection = mongoose.connection.db.collection(name);
+
+      const count = await collection.countDocuments({ [key]: value });
+      totalCount += count;
+
+      const data = await collection
+        .find({ [key]: value })
         .skip(skip)
-        .limit(12)
+        .limit(limit)
         .toArray();
 
-        return data
-    })
+      allResults.push(...data);
+    }
 
-    const result = (await Promise.all(searchData)).flat();
-    
-    res.status(200).json({result, totalPages : Math.ceil(totalCount / 12)})
+    const totalPages = Math.ceil(totalCount / limit);
 
+    res.status(200).json({
+      result: allResults,
+      totalPages,
+      currentPage: page,
+      totalResults: totalCount
+    });
 
   } catch (error) {
-    res.status(500).json({err_msg: error})
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
