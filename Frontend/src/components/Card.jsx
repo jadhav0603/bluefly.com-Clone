@@ -24,9 +24,10 @@ export default function Card({ response }) {
 
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+
     async function fetchFavorites() {
       try {
-        const token = localStorage.getItem('token')
         const res = await axios.get(
           "https://bluefly-com-clone-6ri4.onrender.com/addProduct/getFavouriteData",
           {
@@ -42,7 +43,11 @@ export default function Card({ response }) {
         console.error("Error fetching favorites:", error);
       }
     }
-    fetchFavorites();
+
+    if(token){
+      fetchFavorites();
+    }
+    
   }, [setCount]);
 
   async function handleFav(ele) {

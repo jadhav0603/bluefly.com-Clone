@@ -42,7 +42,7 @@ export default function SearchedDataPage() {
 
 
   return (
-    (isLoading) ? <div>Loading....</div> :
+    (isLoading) ? <div className="text-lg m-6 font-semibold animate-pulse">L O A D I N G . . . .</div> :
     <div>
       <h1 className="W-[98vw] text-2xl lg:text-4xl uppercase flex justify-center p-[2vw]">
         DESIGNER {data[0]?.category}

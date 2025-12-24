@@ -33,7 +33,10 @@ export default function FavouriteButton() {
             setIsVisible(response.data.data.length > 0)
         }
 
-        fetchFavorites()
+        // const token = localStorage.getItem(token)
+        if(token){
+            fetchFavorites()
+        }
         
         if(count == 0){
             setIsVisible(false)

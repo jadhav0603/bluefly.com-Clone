@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLessThan } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
+import { fetchNavSearchData } from "../functions/useNavSearch";
 
 const shoesBrands = [
   "Nike", "Adidas", "Puma", "Reebok", "Converse", "Vans", "Timberland", "Dr. Martens",
@@ -99,28 +99,45 @@ const allBrands = [
 function Routes() {
   const Navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
+  const [page, setpage] = useState(1)
+
+
+  // const handleNavSearchData = async (key, value, productCategory) => {
+  //   setIsLoading(true)
+  //   const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}?page=${page}`);
+  //   console.log(response.data);
+  //   const data = []
+
+  //   response.data.result.map((ele)=>{
+  //     if(ele.category === productCategory || productCategory === "allData"){
+  //       data.push(ele)
+  //     }
+  //   })
+
+  //   setIsLoading(false)
+
+  //   Navigate('/SearchedDataPage', { state: { isLoading, data} })
+
+  // };
+
 
   const handleNavSearchData = async (key, value, productCategory) => {
-    setIsLoading(true)
-    const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`);
-    console.log(response.data);
-    const data = []
+  try {
+    setIsLoading(true);
 
-    response.data.map((ele)=>{
-      if(ele.category === productCategory || productCategory === "allData"){
-        data.push(ele)
-      }
-    })
+    const data = await fetchNavSearchData(key, value, productCategory, page);
 
-    setIsLoading(false)
-
-    Navigate('/SearchedDataPage', { state: { isLoading, data} })
-
-  };
+    Navigate("/SearchedDataPage", { state: { data } });
+  } catch (error) {
+    console.error("Search error:", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
 
   if(isLoading){
-    return <p className="text-lg font-semibold animate-pulse">L O A D I N G . . .</p>
+    return <p className="text-lg m-6 font-semibold animate-pulse">L O A D I N G . . .</p>
   }
 
 

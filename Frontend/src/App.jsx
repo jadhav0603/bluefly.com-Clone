@@ -17,7 +17,7 @@ function App() {
       const toastId = toast.loading("Wait For Connecting Database Server")
 
       try{
-        axios.get("https://bluefly-com-clone-6ri4.onrender.com/warm-up")
+        axios.get("https://bluefly-com-clone-6ri4.onrender.com/warmUp")
         // console.log("connected DB :", res.data)
 
         toast.update(toastId,{

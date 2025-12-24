@@ -48,7 +48,7 @@ export default function Login() {
 
     if(isLoading) {
         return( 
-            <p className="flex flex-col items-center justify-center border py-[2vw] m-[auto]" >L O A D I N G . . .</p>
+            <p className="flex flex-col items-center justify-center border py-[2vw] m-[auto] text-lg font-semibold animate-pulse" >L O A D I N G . . .</p>
         ) 
     }
 
