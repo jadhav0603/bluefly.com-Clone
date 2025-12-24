@@ -17,15 +17,23 @@ router.get("/:key/:value", async(req, res) => {
   try {
     const searchData = collectionArray.map(async(ele)=>{
         const Collection_Name = mongoose.connection.db.collection(ele)
+        const page = parseInt(req.query.page) || 1
+        const skip = (page - 1) * 12
+        const totalCount = Collection_Name.countDocuments
 
-        const data = await Collection_Name.find({[key]:value}).limit(20).toArray();
+        const data = await Collection_Name.find(
+          {[key]:value}
+        )
+        .skip(skip)
+        .limit(12)
+        .toArray();
 
         return data
     })
 
     const result = (await Promise.all(searchData)).flat();
     
-    res.status(200).json(result)
+    res.status(200).json({result, totalPages : Math.ceil(totalCount / 12)})
 
 
   } catch (error) {
