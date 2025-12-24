@@ -19,10 +19,11 @@ const page = parseInt(req.query.page) || 1;
   ];
 
   try {
+    let totalCount = 0;
     const searchData = collectionArray.map(async(ele)=>{
         const Collection_Name = mongoose.connection.db.collection(ele)
         
-          const count = await collection.countDocuments({ [key]: value });
+          const count = await Collection_Name.countDocuments({ [key]: value });
       totalCount += count;
 
         const data = await Collection_Name.find(
@@ -43,7 +44,7 @@ const page = parseInt(req.query.page) || 1;
 
 
   } catch (error) {
-    res.status(500).json({err_msg: error})
+    res.status(500).json({error: error.message})
   }
 });
 
