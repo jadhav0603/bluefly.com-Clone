@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get("/:key/:value", async(req, res) => {
   const { key, value } = req.params;
-const page = parseInt(req.query.page) || 1;
-  const limit = 12;
-  const skip = (page - 1) * limit;
+// const page = parseInt(req.query.page) || 1;
+//   const limit = 12;
+//   const skip = (page - 1) * limit;
 
 
   const collectionArray = [
@@ -29,8 +29,6 @@ const page = parseInt(req.query.page) || 1;
         const data = await Collection_Name.find(
           {[key]:value}
         )
-        .skip(skip)
-        .limit(12)
         .toArray();
 
         return data
