@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function FavouritePage() {
   const [data, setData] = useState([])
-  const { count,setCount } = useContext(CountContext)
+  const { setCount } = useContext(CountContext)
 
   const navigate = useNavigate()
 
@@ -67,7 +67,7 @@ export default function FavouritePage() {
 
   const handleCarts = async (ele)=>{
     const token = localStorage.getItem('token')
-    console.log('token = ', token)
+    // console.log('token = ', token)
     try {
       const response = await axios.post(
         'https://bluefly-com-clone-6ri4.onrender.com/handleCarts/addToCart',
@@ -109,11 +109,11 @@ export default function FavouritePage() {
 
               <div className="relative group">
                 <img
-                  className="lg:w-[12vw] h-fit"
+                  className="lg:w-[12vw] lg:h-fit w-[60vw] h-[70vw]"
                   src={ele.image1}
                 />
                 <img
-                  className="absolute lg:w-[12vw] h-fit top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                  className="absolute lg:w-[12vw] lg:h-fit w-[60vw] h-[70vw] top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                   src={ele.image2}
                 />
               </div>

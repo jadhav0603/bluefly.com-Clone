@@ -35,7 +35,7 @@ const AddCarts = () => {
     cartData();
   }, []);
 
-  console.log("quantities = ", quantities)
+  // console.log("quantities = ", quantities)
 
 
   const updateQuantity = (id, type) => {

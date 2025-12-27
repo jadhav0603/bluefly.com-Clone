@@ -13,7 +13,7 @@ export default function LogedIn() {
             const token = localStorage.getItem("token");
 
             if (!token) {
-                console.log("No token found, redirecting to login");
+                // console.log("No token found, redirecting to login");
                 navigate("/Login");
                 return;
             }
@@ -25,7 +25,7 @@ export default function LogedIn() {
                     }
                 });
 
-                console.log("User data:", res.data);
+                // console.log("User data:", res.data);
                 setUserData(res.data.user);
 
             } catch (error) {

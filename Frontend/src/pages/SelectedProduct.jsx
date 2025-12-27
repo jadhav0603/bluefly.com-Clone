@@ -16,7 +16,7 @@ export default function SelectedProduct() {
 
     const Navigate = useNavigate()
 
-    console.log("selected product = ", data)
+    // console.log("selected product = ", data)
 
     function handleImageBorder(value) {
         setImage(value)
@@ -31,7 +31,7 @@ export default function SelectedProduct() {
 
     const handleCarts = async (ele)=>{
         const token = localStorage.getItem('token')
-        console.log('token = ', token)
+        // console.log('token = ', token)
         try {
           const response = await axios.post(
             'https://bluefly-com-clone-6ri4.onrender.com/handleCarts/addToCart',
@@ -42,7 +42,7 @@ export default function SelectedProduct() {
               }
             })
           
-            console.log(response)
+            // console.log(response)
             // handleUnfavourite(ele._id)
             // setData((prevData) => prevData.filter((items)=>items._id !== ele._id))
             Navigate('/AddCarts')

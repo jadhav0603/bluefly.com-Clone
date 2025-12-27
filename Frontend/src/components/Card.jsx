@@ -68,7 +68,7 @@ export default function Card({ response }) {
                 }
             }
         );
-        console.log("Favourite Data", res.data);
+        // console.log("Favourite Data", res.data);
 
         if (res.data.message === "Favourite added") {
             setFavorites((prev) => [...prev, ele]);

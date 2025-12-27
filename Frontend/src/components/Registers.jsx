@@ -23,7 +23,7 @@ export default function Registers() {
         try {
             const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/register/',
                 {firstName,lastName,email,password})
-                console.log("Success:", response.data);
+                // console.log("Success:", response.data);
                 if(response.status == 201){
                     localStorage.setItem('token', response.data.token)
                     navigate('/LoginModel')

@@ -24,7 +24,7 @@ export default function Login() {
             setIsLoading(true)
             const response = await axios.post('https://bluefly-com-clone-6ri4.onrender.com/login/',
                 { email, password })
-            console.log("result",response.data)
+            // console.log("result",response.data)
             localStorage.setItem('token', response.data.token);
             setIsLoading(false)
             navigate('/');

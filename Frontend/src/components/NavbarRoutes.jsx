@@ -125,9 +125,11 @@ function Routes() {
   try {
     setIsLoading(true);
 
-    const data = await fetchNavSearchData(key, value, productCategory, page);
+    const {data, currentPage,totalPages} = await fetchNavSearchData(key, value, productCategory, page);
 
-    Navigate("/SearchedDataPage", { state: { data } });
+    // console.log("function data - ",data, currentPage,totalPages)
+    
+    Navigate("/SearchedDataPage", { state: { data,currentPage, totalPages} });
   } catch (error) {
     console.error("Search error:", error);
   } finally {

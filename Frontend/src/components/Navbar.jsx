@@ -20,7 +20,7 @@ function Navbar() {
     const response = await axios.get(
       `https://bluefly-com-clone-6ri4.onrender.com/${inputVal}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     const data = [];
 
     for (let i = 0; i < response.data.length; i++) {
@@ -41,7 +41,7 @@ function Navbar() {
     const response = await axios.get(
       `https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     const data = [];
 
     response.data.map((ele) => {

@@ -41,7 +41,7 @@ const FilterPanel = ({filters,setFilters,response}) => {
   };
 
   const handleIsOpen = ()=>{
-    console.log("run handle isOpen")
+    // console.log("run handle isOpen")
     setIsOpen(!isOpen)
   }
 

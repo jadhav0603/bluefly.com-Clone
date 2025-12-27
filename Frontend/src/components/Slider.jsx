@@ -30,7 +30,7 @@ function Slider(){
 
     const handleData = async (key, value) => {
         const response = await axios.get(`https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`);
-        console.log(response.data);
+        // console.log(response.data);
         const data = []
     
         response.data.map((ele)=>{

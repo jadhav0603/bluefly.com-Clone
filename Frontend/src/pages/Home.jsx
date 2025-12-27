@@ -1,49 +1,87 @@
 import Slider from "../components/Slider";
 import HomePageCard from "../components/HomePageCard";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Home() {
   const Navigate = useNavigate();
+  const [loading, setLoading] = useState (false)
 
   // useEffect(()=>{
   //     handleNavSearchData('rating','4');
   // },[])
 
+  // const handleNavSearchData = async (key, value, gender) => {
+  //   // console.log("run home search");
+  //   setLoading(true)
+  //   const response = await axios.get(
+  //     `https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`
+  //   );
+
+  //   if (gender != "Both") {
+  //     const data = [];
+
+  //     response.data.result.map((ele) => {
+  //       if (ele.gender === gender) {
+  //         data.push(ele);
+  //       }
+  //     });
+
+  //     setLoading(false)
+  //     Navigate("/SearchedDataPage", { state: { data } });
+
+  //   }
+  //   else {
+  //     const data = response.data
+  //     Navigate("/SearchedDataPage", { state: { data } });
+  //   }
+  // };
+
   const handleNavSearchData = async (key, value, gender) => {
-    console.log("run home search");
+  try {
+    setLoading(true);
 
     const response = await axios.get(
-      `https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}`
+      `https://bluefly-com-clone-6ri4.onrender.com/searchData/${key}/${value}?page=1`
     );
 
-    if(gender != "Both"){
-    const data = [];
-    response.data.map((ele) => {
-      if (ele.gender === gender) {
-        data.push(ele);
+    const apiData = response.data.result;   
+
+    let filtered = apiData;
+
+    if (gender !== "Both") {
+      filtered = apiData.filter((ele) => ele.gender === gender);
+    }
+
+    Navigate("/SearchedDataPage", {
+      state: {
+        data: filtered,
+        totalPages: response.data.totalPages,
+        currentPage: response.data.currentPage
       }
     });
-    Navigate("/SearchedDataPage", { state: { data } });
-}
-else{
-    const data = response.data
-    Navigate("/SearchedDataPage", { state: { data } });
-}
-  };
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="">
       <Slider />
       <div className="border w-[93vw] m-[3vw] ">
         <h1 className="text-sm lg:text-3xl py-[3.5vw]  flex justify-center">SHOP BY</h1>
+        { (loading) ? <p className="flex flex-col items-center justify-center border py-[2vw] m-[auto] text-lg font-semibold animate-pulse"> L O A D I N G . . . .</p> :
         <div className="lg:grid lg:grid-cols-4 gap-5 justify-center gap-y-20 px-[3vw] ">
           <div
             onClick={() =>
               handleNavSearchData("category", "Handbags", "Female")
-            }
-          >
+            }>
+
             <HomePageCard
               url={"./image/Home/img117.webp"}
               heading={"LUXE HANDBAGS"}
@@ -122,6 +160,7 @@ else{
           </div>
 
         </div>
+}
       </div>
       <div className="flex justify-center">
         <img className="w-[93vw]" src="./image/Home/img125.webp" alt="image" />
